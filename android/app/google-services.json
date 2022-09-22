@@ -1,0 +1,52 @@
+{
+  "project_info": {
+    "project_number": "712959700939",
+    "project_id": "traidbizseller",
+    "storage_bucket": "traidbizseller.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712959700939:android:bf5541ca4ec77bf8ee504e",
+        "android_client_info": {
+          "package_name": "com.traidbiz_seller.traidbiz_seller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712959700939-00hkg1g1f0uivohoa9skjbd2tg7r0jgh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.traidbiz_seller.traidbiz_seller",
+            "certificate_hash": "6bffe93a471d3eeb58affd709ce4cbde4a102d12"
+          }
+        },
+        {
+          "client_id": "712959700939-0b7utdnmmomcodvldo8hrqn67foqfunj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN0fpnAiSm-vTDICW5wLVp2C5DLlm-ntE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712959700939-0b7utdnmmomcodvldo8hrqn67foqfunj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+
+
+
+
+
