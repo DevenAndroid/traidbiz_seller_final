@@ -27,7 +27,13 @@ class _$CreateProductModelTearOff {
       @JsonKey(name: "product_name") String? productName,
       @JsonKey(name: "product_type") String? productType,
       @JsonKey(name: "product_price") String? productPrice,
-      @JsonKey(name: "product_description") String? productDescription,
+        //
+        @JsonKey(name: "weight") String? productWeight,
+      @JsonKey(name: "length") String? productLength,
+      @JsonKey(name: "width") String? productWidth,
+      @JsonKey(name: "height") String? productHeight,
+        //
+        @JsonKey(name: "product_description") String? productDescription,
       @JsonKey(name: "categories") String? categories,
       @JsonKey(name: "product_image") String? productImage,
       @JsonKey(name: "sku") String? sku,
@@ -38,6 +44,12 @@ class _$CreateProductModelTearOff {
       productName: productName,
       productType: productType,
       productPrice: productPrice,
+      //
+      productWeight: productWeight,
+      productLength: productLength,
+      productWidth: productWidth,
+      productHeight: productHeight,
+      //
       productDescription: productDescription,
       categories: categories,
       productImage: productImage,
@@ -64,6 +76,16 @@ mixin _$CreateProductModel {
   String? get productType => throw _privateConstructorUsedError;
   @JsonKey(name: "product_price")
   String? get productPrice => throw _privateConstructorUsedError;
+  //
+  @JsonKey(name: "weight")
+  String? get productWeight => throw _privateConstructorUsedError;
+  @JsonKey(name: "length")
+  String? get productLength => throw _privateConstructorUsedError;
+  @JsonKey(name: "width")
+  String? get productWidth => throw _privateConstructorUsedError;
+  @JsonKey(name: "height")
+  String? get productHeight => throw _privateConstructorUsedError;
+  //
   @JsonKey(name: "product_description")
   String? get productDescription => throw _privateConstructorUsedError;
   @JsonKey(name: "categories")
@@ -94,6 +116,12 @@ abstract class $CreateProductModelCopyWith<$Res> {
       @JsonKey(name: "product_name") String? productName,
       @JsonKey(name: "product_type") String? productType,
       @JsonKey(name: "product_price") String? productPrice,
+      //
+      @JsonKey(name: "weight") String? productWeight,
+      @JsonKey(name: "length") String? productLength,
+      @JsonKey(name: "width") String? productWidth,
+      @JsonKey(name: "height") String? productHeight,
+      //
       @JsonKey(name: "product_description") String? productDescription,
       @JsonKey(name: "categories") String? categories,
       @JsonKey(name: "product_image") String? productImage,
@@ -117,6 +145,12 @@ class _$CreateProductModelCopyWithImpl<$Res>
     Object? productName = freezed,
     Object? productType = freezed,
     Object? productPrice = freezed,
+    //
+    Object? productWeight = freezed,
+    Object? productLength = freezed,
+    Object? productWidth = freezed,
+    Object? productHeight = freezed,
+    //
     Object? productDescription = freezed,
     Object? categories = freezed,
     Object? productImage = freezed,
@@ -141,6 +175,25 @@ class _$CreateProductModelCopyWithImpl<$Res>
           ? _value.productPrice
           : productPrice // ignore: cast_nullable_to_non_nullable
               as String?,
+
+      //
+      productWeight: productWeight == freezed
+          ? _value.productWeight
+          : productWeight // ignore: cast_nullable_to_non_nullable
+      as String?,
+      productLength: productLength == freezed
+          ? _value.productLength
+          : productLength // ignore: cast_nullable_to_non_nullable
+      as String?,
+      productWidth: productWidth == freezed
+          ? _value.productWidth
+          : productWidth // ignore: cast_nullable_to_non_nullable
+      as String?,
+      productHeight: productHeight == freezed
+          ? _value.productHeight
+          : productHeight // ignore: cast_nullable_to_non_nullable
+      as String?,
+      //
       productDescription: productDescription == freezed
           ? _value.productDescription
           : productDescription // ignore: cast_nullable_to_non_nullable
@@ -181,6 +234,12 @@ abstract class _$CreateProductModelCopyWith<$Res>
       @JsonKey(name: "product_name") String? productName,
       @JsonKey(name: "product_type") String? productType,
       @JsonKey(name: "product_price") String? productPrice,
+        //
+      @JsonKey(name: "weight") String? productWeight,
+      @JsonKey(name: "length") String? productLength,
+      @JsonKey(name: "width") String? productWidth,
+      @JsonKey(name: "height") String? productHeight,
+      //
       @JsonKey(name: "product_description") String? productDescription,
       @JsonKey(name: "categories") String? categories,
       @JsonKey(name: "product_image") String? productImage,
@@ -206,6 +265,12 @@ class __$CreateProductModelCopyWithImpl<$Res>
     Object? productName = freezed,
     Object? productType = freezed,
     Object? productPrice = freezed,
+    //
+    Object? productWeight = freezed,
+    Object? productLength = freezed,
+    Object? productWidth = freezed,
+    Object? productHeight = freezed,
+    //
     Object? productDescription = freezed,
     Object? categories = freezed,
     Object? productImage = freezed,
@@ -230,6 +295,27 @@ class __$CreateProductModelCopyWithImpl<$Res>
           ? _value.productPrice
           : productPrice // ignore: cast_nullable_to_non_nullable
               as String?,
+      //
+      productWeight: productWeight == freezed
+          ? _value.productWeight
+          : productWeight // ignore: cast_nullable_to_non_nullable
+      as String?,
+
+      productLength: productLength == freezed
+          ? _value.productLength
+          : productLength // ignore: cast_nullable_to_non_nullable
+      as String?,
+
+      productWidth: productWidth == freezed
+          ? _value.productWidth
+          : productWidth // ignore: cast_nullable_to_non_nullable
+      as String?,
+
+      productHeight: productHeight == freezed
+          ? _value.productHeight
+          : productHeight // ignore: cast_nullable_to_non_nullable
+      as String?,
+      //
       productDescription: productDescription == freezed
           ? _value.productDescription
           : productDescription // ignore: cast_nullable_to_non_nullable
@@ -266,6 +352,12 @@ class _$_CreateProductModel implements _CreateProductModel {
       @JsonKey(name: "product_name") this.productName,
       @JsonKey(name: "product_type") this.productType,
       @JsonKey(name: "product_price") this.productPrice,
+      //
+      @JsonKey(name: "weight") this.productWeight,
+      @JsonKey(name: "length") this.productLength,
+      @JsonKey(name: "width") this.productWidth,
+      @JsonKey(name: "height") this.productHeight,
+      //
       @JsonKey(name: "product_description") this.productDescription,
       @JsonKey(name: "categories") this.categories,
       @JsonKey(name: "product_image") this.productImage,
@@ -287,6 +379,20 @@ class _$_CreateProductModel implements _CreateProductModel {
   @override
   @JsonKey(name: "product_price")
   final String? productPrice;
+  //
+  @override
+  @JsonKey(name: "weight")
+  final String? productWeight;
+  @override
+  @JsonKey(name: "length")
+  final String? productLength;
+  @override
+  @JsonKey(name: "width")
+  final String? productWidth;
+  @override
+  @JsonKey(name: "height")
+  final String? productHeight;
+  //
   @override
   @JsonKey(name: "product_description")
   final String? productDescription;
@@ -308,7 +414,7 @@ class _$_CreateProductModel implements _CreateProductModel {
 
   @override
   String toString() {
-    return 'CreateProductModel(cookie: $cookie, productName: $productName, productType: $productType, productPrice: $productPrice, productDescription: $productDescription, categories: $categories, productImage: $productImage, sku: $sku,stockQuantity: $stockQuantity, productGallery: $productGallery)';
+    return 'CreateProductModel(cookie: $cookie, productName: $productName, productType: $productType, productPrice: $productPrice,productWeight: $productWeight,productLength: $productLength,productWidth: $productWidth,productHeight: $productHeight, productDescription: $productDescription, categories: $categories, productImage: $productImage, sku: $sku,stockQuantity: $stockQuantity, productGallery: $productGallery)';
   }
 
   @override
@@ -317,14 +423,17 @@ class _$_CreateProductModel implements _CreateProductModel {
         (other.runtimeType == runtimeType &&
             other is _CreateProductModel &&
             const DeepCollectionEquality().equals(other.cookie, cookie) &&
-            const DeepCollectionEquality()
-                .equals(other.productName, productName) &&
+            const DeepCollectionEquality().equals(other.productName, productName) &&
             const DeepCollectionEquality()
                 .equals(other.productType, productType) &&
-            const DeepCollectionEquality()
-                .equals(other.productPrice, productPrice) &&
-            const DeepCollectionEquality()
-                .equals(other.productDescription, productDescription) &&
+            const DeepCollectionEquality().equals(other.productPrice, productPrice) &&
+            //
+            const DeepCollectionEquality().equals(other.productWeight, productWeight) &&
+            const DeepCollectionEquality().equals(other.productLength, productLength) &&
+            const DeepCollectionEquality().equals(other.productWidth, productWidth) &&
+            const DeepCollectionEquality().equals(other.productHeight, productHeight) &&
+            //
+            const DeepCollectionEquality().equals(other.productDescription, productDescription) &&
             const DeepCollectionEquality()
                 .equals(other.categories, categories) &&
             const DeepCollectionEquality()
@@ -343,6 +452,12 @@ class _$_CreateProductModel implements _CreateProductModel {
       const DeepCollectionEquality().hash(productName),
       const DeepCollectionEquality().hash(productType),
       const DeepCollectionEquality().hash(productPrice),
+      //
+      const DeepCollectionEquality().hash(productWeight),
+      const DeepCollectionEquality().hash(productLength),
+      const DeepCollectionEquality().hash(productWidth),
+      const DeepCollectionEquality().hash(productHeight),
+      //
       const DeepCollectionEquality().hash(productDescription),
       const DeepCollectionEquality().hash(categories),
       const DeepCollectionEquality().hash(productImage),
@@ -364,24 +479,21 @@ class _$_CreateProductModel implements _CreateProductModel {
 abstract class _CreateProductModel implements CreateProductModel {
   const factory _CreateProductModel(
       {String? cookie,
-      @JsonKey(name: "product_name")
-          String? productName,
-      @JsonKey(name: "product_type")
-          String? productType,
-      @JsonKey(name: "product_price")
-          String? productPrice,
-      @JsonKey(name: "product_description")
-          String? productDescription,
-      @JsonKey(name: "categories")
-          String? categories,
-      @JsonKey(name: "product_image")
-          String? productImage,
-      @JsonKey(name: "sku")
-          String? sku,
-      @JsonKey(name: "stock_quantity")
-          String? stockQuantity,
-      @JsonKey(name: "product_gallery")
-          List<ProductGallery>? productGallery}) = _$_CreateProductModel;
+      @JsonKey(name: "product_name") String? productName,
+      @JsonKey(name: "product_type") String? productType,
+      @JsonKey(name: "product_price") String? productPrice,
+        //
+      @JsonKey(name: "weight") String? productWeight,
+      @JsonKey(name: "length") String? productLength,
+      @JsonKey(name: "width") String? productWidth,
+      @JsonKey(name: "height") String? productHeight,
+        //
+      @JsonKey(name: "product_description") String? productDescription,
+      @JsonKey(name: "categories") String? categories,
+      @JsonKey(name: "product_image") String? productImage,
+      @JsonKey(name: "sku") String? sku,
+      @JsonKey(name: "stock_quantity") String? stockQuantity,
+      @JsonKey(name: "product_gallery") List<ProductGallery>? productGallery}) = _$_CreateProductModel;
 
   factory _CreateProductModel.fromJson(Map<String, dynamic> json) =
       _$_CreateProductModel.fromJson;
@@ -395,11 +507,20 @@ abstract class _CreateProductModel implements CreateProductModel {
   @JsonKey(name: "product_type")
   String? get productType;
   @override
-  @JsonKey(name: "product_price")
-  String? get productPrice;
+  @JsonKey(name: "product_price")String? get productPrice;
+  //
   @override
-  @JsonKey(name: "product_description")
-  String? get productDescription;
+  @JsonKey(name: "weight") String? get productWeight;
+  @override
+  @JsonKey(name: "length") String? get productLength;
+  @override
+  @JsonKey(name: "width") String? get productWidth;
+  @override
+  @JsonKey(name: "height") String? get productHeight;
+  //
+
+  @override
+  @JsonKey(name: "product_description")String? get productDescription;
   @override
   @JsonKey(name: "categories")
   String? get categories;

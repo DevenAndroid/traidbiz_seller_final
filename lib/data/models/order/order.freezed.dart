@@ -28,6 +28,7 @@ class _$StoreOrderTearOff {
       @JsonKey(name: 'total') String? shippingTotal,
       @JsonKey(name: 'currency') String? currency,
       @JsonKey(name: 'currency_symbol') String? currencySymbol,
+      @JsonKey(name: 'order_pdf') String? order_pdf,
       @JsonKey(name: 'date_created') OrderDate? createDate}) {
     return _StoreOrder(
       id: id,
@@ -35,6 +36,7 @@ class _$StoreOrderTearOff {
       shippingTotal: shippingTotal,
       currency: currency,
       currencySymbol: currencySymbol,
+      order_pdf: order_pdf,
       createDate: createDate,
     );
   }
@@ -58,6 +60,8 @@ mixin _$StoreOrder {
   String? get currency => throw _privateConstructorUsedError;
   @JsonKey(name: 'currency_symbol')
   String? get currencySymbol => throw _privateConstructorUsedError;
+  @JsonKey(name: 'order_pdf')
+  String? get order_pdf => throw _privateConstructorUsedError;
   @JsonKey(name: 'date_created')
   OrderDate? get createDate => throw _privateConstructorUsedError;
 
@@ -79,6 +83,7 @@ abstract class $StoreOrderCopyWith<$Res> {
       @JsonKey(name: 'total') String? shippingTotal,
       @JsonKey(name: 'currency') String? currency,
       @JsonKey(name: 'currency_symbol') String? currencySymbol,
+      @JsonKey(name: 'order_pdf') String? order_pdf,
       @JsonKey(name: 'date_created') OrderDate? createDate});
 
   $OrderDateCopyWith<$Res>? get createDate;
@@ -100,6 +105,7 @@ class _$StoreOrderCopyWithImpl<$Res> implements $StoreOrderCopyWith<$Res> {
     Object? shippingTotal = freezed,
     Object? currency = freezed,
     Object? currencySymbol = freezed,
+    Object? order_pdf = freezed,
     Object? createDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -126,6 +132,10 @@ class _$StoreOrderCopyWithImpl<$Res> implements $StoreOrderCopyWith<$Res> {
       currencySymbol: currencySymbol == freezed
           ? _value.currencySymbol
           : currencySymbol // ignore: cast_nullable_to_non_nullable
+              as String?,
+      order_pdf: order_pdf == freezed
+          ? _value.order_pdf
+          : order_pdf // ignore: cast_nullable_to_non_nullable
               as String?,
       createDate: createDate == freezed
           ? _value.createDate
@@ -159,6 +169,7 @@ abstract class _$StoreOrderCopyWith<$Res> implements $StoreOrderCopyWith<$Res> {
       @JsonKey(name: 'total') String? shippingTotal,
       @JsonKey(name: 'currency') String? currency,
       @JsonKey(name: 'currency_symbol') String? currencySymbol,
+      @JsonKey(name: 'order_pdf') String? order_pdf,
       @JsonKey(name: 'date_created') OrderDate? createDate});
 
   @override
@@ -183,6 +194,7 @@ class __$StoreOrderCopyWithImpl<$Res> extends _$StoreOrderCopyWithImpl<$Res>
     Object? shippingTotal = freezed,
     Object? currency = freezed,
     Object? currencySymbol = freezed,
+    Object? order_pdf = freezed,
     Object? createDate = freezed,
   }) {
     return _then(_StoreOrder(
@@ -210,6 +222,10 @@ class __$StoreOrderCopyWithImpl<$Res> extends _$StoreOrderCopyWithImpl<$Res>
           ? _value.currencySymbol
           : currencySymbol // ignore: cast_nullable_to_non_nullable
               as String?,
+      order_pdf: order_pdf == freezed
+          ? _value.order_pdf
+          : order_pdf // ignore: cast_nullable_to_non_nullable
+              as String?,
       createDate: createDate == freezed
           ? _value.createDate
           : createDate // ignore: cast_nullable_to_non_nullable
@@ -228,6 +244,7 @@ class _$_StoreOrder implements _StoreOrder {
       @JsonKey(name: 'total') this.shippingTotal,
       @JsonKey(name: 'currency') this.currency,
       @JsonKey(name: 'currency_symbol') this.currencySymbol,
+      @JsonKey(name: 'order_pdf') this.order_pdf,
       @JsonKey(name: 'date_created') this.createDate});
 
   factory _$_StoreOrder.fromJson(Map<String, dynamic> json) =>
@@ -249,12 +266,15 @@ class _$_StoreOrder implements _StoreOrder {
   @JsonKey(name: 'currency_symbol')
   final String? currencySymbol;
   @override
+  @JsonKey(name: 'order_pdf')
+  final String? order_pdf;
+  @override
   @JsonKey(name: 'date_created')
   final OrderDate? createDate;
 
   @override
   String toString() {
-    return 'StoreOrder(id: $id, status: $status, shippingTotal: $shippingTotal, currency: $currency, currencySymbol: $currencySymbol, createDate: $createDate)';
+    return 'StoreOrder(id: $id, status: $status, shippingTotal: $shippingTotal, currency: $currency, currencySymbol: $currencySymbol, order_pdf: $order_pdf, createDate: $createDate)';
   }
 
   @override
@@ -267,8 +287,8 @@ class _$_StoreOrder implements _StoreOrder {
             const DeepCollectionEquality().equals(other.order_number, order_number) &&
             const DeepCollectionEquality().equals(other.shippingTotal, shippingTotal) &&
             const DeepCollectionEquality().equals(other.currency, currency) &&
-            const DeepCollectionEquality()
-                .equals(other.currencySymbol, currencySymbol) &&
+            const DeepCollectionEquality().equals(other.currencySymbol, currencySymbol) &&
+            const DeepCollectionEquality().equals(other.order_pdf, order_pdf) &&
             const DeepCollectionEquality()
                 .equals(other.createDate, createDate));
   }
@@ -282,6 +302,7 @@ class _$_StoreOrder implements _StoreOrder {
       const DeepCollectionEquality().hash(shippingTotal),
       const DeepCollectionEquality().hash(currency),
       const DeepCollectionEquality().hash(currencySymbol),
+      const DeepCollectionEquality().hash(order_pdf),
       const DeepCollectionEquality().hash(createDate));
 
   @JsonKey(ignore: true)
@@ -303,6 +324,7 @@ abstract class _StoreOrder implements StoreOrder {
       @JsonKey(name: 'total') String? shippingTotal,
       @JsonKey(name: 'currency') String? currency,
       @JsonKey(name: 'currency_symbol') String? currencySymbol,
+      @JsonKey(name: 'order_pdf') String? order_pdf,
       @JsonKey(name: 'date_created') OrderDate? createDate}) = _$_StoreOrder;
 
   factory _StoreOrder.fromJson(Map<String, dynamic> json) =
@@ -323,6 +345,9 @@ abstract class _StoreOrder implements StoreOrder {
   @override
   @JsonKey(name: 'currency_symbol')
   String? get currencySymbol;
+  @override
+  @JsonKey(name: 'order_pdf')
+  String? get order_pdf;
   @override
   @JsonKey(name: 'date_created')
   OrderDate? get createDate;

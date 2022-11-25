@@ -13,6 +13,12 @@ _$_CreateProductModel _$$_CreateProductModelFromJson(
       productName: json['product_name'] as String?,
       productType: json['product_type'] as String?,
       productPrice: json['product_price'] as String?,
+      //
+      productWeight: json['weight'] as String?,
+      productLength: json['length'] as String?,
+      productWidth: json['width'] as String?,
+      productHeight: json['height'] as String?,
+      //
       productDescription: json['product_description'] as String?,
       categories: json['categories'] as String?,
       productImage: json['product_image'] as String?,
@@ -30,6 +36,12 @@ Map<String, dynamic> _$$_CreateProductModelToJson(
       'product_name': instance.productName,
       'product_type': instance.productType,
       'product_price': instance.productPrice,
+      //
+      'weight': instance.productWeight,
+      'length': instance.productLength,
+      'width': instance.productWidth,
+      'height': instance.productHeight,
+          //
       'product_description': instance.productDescription,
       'categories': instance.categories,
       'product_image': instance.productImage,

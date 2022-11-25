@@ -44,6 +44,7 @@ class ProductRepository {
     String vendorId, {
     int? perPage = 10,
     int? pageNo = 1,
+        search,
   }) async {
     final response = await ApiService.post(productCategoriesApi, _dio,
         body: {
@@ -51,6 +52,7 @@ class ProductRepository {
       "vendor_id": vendorId,
       "per_page": perPage,
       "page_no": pageNo,
+      "search": search,
     });
 
     return ProductCategories.fromJson(response);

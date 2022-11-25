@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:traidbiz_seller/data/models/order/order.dart';
 import 'package:traidbiz_seller/data/local/auth_db.dart';
 import 'package:traidbiz_seller/data/remote/api_service.dart';
@@ -33,6 +37,8 @@ class StoreOrderRepository {
       "cookie": AuthDb.getAuthCookie()?.cookie,
       "order_id": "$id",
     });
+
+    log("sdjdsjhf "+_response['response']['order_pdf']);
 
     try {
       dynamic _result = _response['response'];

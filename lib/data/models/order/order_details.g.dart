@@ -15,6 +15,7 @@ _$_StoreOrderDetail _$$_StoreOrderDetailFromJson(Map<String, dynamic> json) =>
       totalTax: json['total_tax'] as String?,
           orderTotal: json['total'] as String?,
       currencySymbol: json['currency_symbol'] as String?,
+          order_pdf: json['order_pdf'] as String?,
       paymentMethodTitle: json['payment_method_title'] as String?,
       createDate: json['date_created'] as String?,
       lineItems: (json['line_items'] as List<dynamic>?)
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$_StoreOrderDetailToJson(_$_StoreOrderDetail instance) =>
       'shipping_total': instance.shippingTotal,
       'total_tax': instance.totalTax,
       'currency_symbol': instance.currencySymbol,
+      'order_pdf': instance.order_pdf,
       'payment_method_title': instance.paymentMethodTitle,
       'date_created': instance.createDate,
       'line_items': instance.lineItems,

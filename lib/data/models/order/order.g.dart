@@ -14,6 +14,7 @@ _$_StoreOrder _$$_StoreOrderFromJson(Map<String, dynamic> json) =>
       shippingTotal: json['total'] as String?,
       currency: json['currency'] as String?,
       currencySymbol: json['currency_symbol'] as String?,
+      order_pdf: json['order_pdf'] as String?,
       createDate: json['date_created'] == null
           ? null
           : OrderDate.fromJson(json['date_created'] as Map<String, dynamic>),
@@ -27,6 +28,7 @@ Map<String, dynamic> _$$_StoreOrderToJson(_$_StoreOrder instance) =>
       'total': instance.shippingTotal,
       'currency': instance.currency,
       'currency_symbol': instance.currencySymbol,
+      'order_pdf': instance.order_pdf,
       'date_created': instance.createDate,
     };
 

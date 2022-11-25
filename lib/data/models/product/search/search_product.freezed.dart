@@ -32,7 +32,13 @@ class _$SearchProductTearOff {
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
-      @JsonKey(name: "stock_quantity") dynamic quantity}) {
+        //
+        @JsonKey(name: "weight") dynamic productWeight,
+        @JsonKey(name: "length") dynamic productLength,
+        @JsonKey(name: "width") dynamic productWidth,
+        @JsonKey(name: "height") dynamic productHeight,
+        //
+        @JsonKey(name: "stock_quantity") dynamic quantity}) {
     return _SearchProduct(
       id: id,
       name: name,
@@ -43,6 +49,10 @@ class _$SearchProductTearOff {
       priceHtml: priceHtml,
       salePrice: salePrice,
       regularPrice: regularPrice,
+    productWeight: productWeight,
+    productLength: productLength,
+    productWidth: productWidth,
+    productHeight: productHeight,
       quantity: quantity,
     );
   }
@@ -75,6 +85,19 @@ mixin _$SearchProduct {
   dynamic get salePrice => throw _privateConstructorUsedError;
   @JsonKey(name: "regular_price")
   dynamic get regularPrice => throw _privateConstructorUsedError;
+
+  //
+  @JsonKey(name: "weight")
+  dynamic get productWeight => throw _privateConstructorUsedError;
+  @JsonKey(name: "length")
+  dynamic get productLength => throw _privateConstructorUsedError;
+  @JsonKey(name: "width")
+  dynamic get productWidth => throw _privateConstructorUsedError;
+  @JsonKey(name: "height")
+  dynamic get productHeight => throw _privateConstructorUsedError;
+  //
+
+
   @JsonKey(name: "stock_quantity")
   dynamic get quantity => throw _privateConstructorUsedError;
 
@@ -99,6 +122,10 @@ abstract class $SearchProductCopyWith<$Res> {
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
+      @JsonKey(name: "weight") dynamic productWeight,
+      @JsonKey(name: "length") dynamic productLength,
+      @JsonKey(name: "width") dynamic productWidth,
+      @JsonKey(name: "height") dynamic productHeight,
       @JsonKey(name: "stock_quantity") dynamic quantity});
 }
 
@@ -122,6 +149,10 @@ class _$SearchProductCopyWithImpl<$Res>
     Object? priceHtml = freezed,
     Object? salePrice = freezed,
     Object? regularPrice = freezed,
+    Object? productWeight = freezed,
+    Object? productLength = freezed,
+    Object? productWidth = freezed,
+    Object? productHeight = freezed,
     Object? quantity = freezed,
   }) {
     return _then(_value.copyWith(
@@ -161,6 +192,24 @@ class _$SearchProductCopyWithImpl<$Res>
           ? _value.regularPrice
           : regularPrice // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      //
+      productWeight: productWeight == freezed
+          ? _value.productWeight
+          : productWeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productLength: productLength == freezed
+          ? _value.productLength
+          : productLength // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productWidth: productWidth == freezed
+          ? _value.productWidth
+          : productWidth // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productHeight: productHeight == freezed
+          ? _value.productHeight
+          : productHeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      //
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -186,6 +235,10 @@ abstract class _$SearchProductCopyWith<$Res>
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
+        @JsonKey(name: "weight") dynamic productWeight,
+        @JsonKey(name: "length") dynamic productLength,
+        @JsonKey(name: "width") dynamic productWidth,
+        @JsonKey(name: "height") dynamic productHeight,
       @JsonKey(name: "stock_quantity") dynamic quantity});
 }
 
@@ -211,6 +264,10 @@ class __$SearchProductCopyWithImpl<$Res>
     Object? priceHtml = freezed,
     Object? salePrice = freezed,
     Object? regularPrice = freezed,
+    Object? productWeight = freezed,
+    Object? productLength = freezed,
+    Object? productWidth = freezed,
+    Object? productHeight = freezed,
     Object? quantity = freezed,
   }) {
     return _then(_SearchProduct(
@@ -250,6 +307,24 @@ class __$SearchProductCopyWithImpl<$Res>
           ? _value.regularPrice
           : regularPrice // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      //
+      productWeight: productWeight == freezed
+          ? _value.productWeight
+          : productWeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productLength: productLength == freezed
+          ? _value.productLength
+          : productLength // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productWidth: productWidth == freezed
+          ? _value.productWidth
+          : productWidth // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productHeight: productHeight == freezed
+          ? _value.productHeight
+          : productHeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      //
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -271,6 +346,10 @@ class _$_SearchProduct implements _SearchProduct {
       @JsonKey(name: "price_html") this.priceHtml,
       @JsonKey(name: "sale_price") this.salePrice,
       @JsonKey(name: "regular_price") this.regularPrice,
+        @JsonKey(name: "weight") this.productWeight,
+        @JsonKey(name: "length") this.productLength,
+        @JsonKey(name: "width") this.productWidth,
+        @JsonKey(name: "height") this.productHeight,
       @JsonKey(name: "stock_quantity") this.quantity});
 
   factory _$_SearchProduct.fromJson(Map<String, dynamic> json) =>
@@ -303,13 +382,25 @@ class _$_SearchProduct implements _SearchProduct {
   @override
   @JsonKey(name: "regular_price")
   final dynamic regularPrice;
+
+  //
+  @override
+  @JsonKey(name: "weight")final dynamic productWeight;
+  @override
+  @JsonKey(name: "length")final dynamic productLength;
+  @override
+  @JsonKey(name: "width")final dynamic productWidth;
+  @override
+  @JsonKey(name: "height")final dynamic productHeight;
+  //
+
   @override
   @JsonKey(name: "stock_quantity")
   final dynamic quantity;
 
   @override
   String toString() {
-    return 'SearchProduct(id: $id, name: $name, type: $type, description: $description, imageUrl: $imageUrl, price: $price, priceHtml: $priceHtml, salePrice: $salePrice, regularPrice: $regularPrice, quantity: $quantity)';
+    return 'SearchProduct(id: $id, name: $name, type: $type, description: $description, imageUrl: $imageUrl, price: $price, priceHtml: $priceHtml, salePrice: $salePrice, regularPrice: $regularPrice, productWeight: $productWeight, productLength: $productLength, productWidth: $productWidth, productHeight: $productHeight, quantity: $quantity)';
   }
 
   @override
@@ -326,8 +417,11 @@ class _$_SearchProduct implements _SearchProduct {
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.priceHtml, priceHtml) &&
             const DeepCollectionEquality().equals(other.salePrice, salePrice) &&
-            const DeepCollectionEquality()
-                .equals(other.regularPrice, regularPrice) &&
+            const DeepCollectionEquality().equals(other.regularPrice, regularPrice) &&
+            const DeepCollectionEquality().equals(other.productWeight, productWeight) &&
+            const DeepCollectionEquality().equals(other.productLength, productLength) &&
+            const DeepCollectionEquality().equals(other.productWidth, productWidth) &&
+            const DeepCollectionEquality().equals(other.productHeight, productHeight) &&
             const DeepCollectionEquality().equals(other.quantity, quantity));
   }
 
@@ -343,6 +437,10 @@ class _$_SearchProduct implements _SearchProduct {
       const DeepCollectionEquality().hash(priceHtml),
       const DeepCollectionEquality().hash(salePrice),
       const DeepCollectionEquality().hash(regularPrice),
+      const DeepCollectionEquality().hash(productWeight),
+      const DeepCollectionEquality().hash(productLength),
+      const DeepCollectionEquality().hash(productWidth),
+      const DeepCollectionEquality().hash(productHeight),
       const DeepCollectionEquality().hash(quantity));
 
   @JsonKey(ignore: true)
@@ -367,6 +465,10 @@ abstract class _SearchProduct implements SearchProduct {
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
+        @JsonKey(name: "weight") dynamic productWeight,
+        @JsonKey(name: "length") dynamic productLength,
+        @JsonKey(name: "width") dynamic productWidth,
+        @JsonKey(name: "height") dynamic productHeight,
       @JsonKey(name: "stock_quantity") dynamic quantity}) = _$_SearchProduct;
 
   factory _SearchProduct.fromJson(Map<String, dynamic> json) =

@@ -26,7 +26,6 @@ class CommonDrawer extends StatefulWidget {
 class _CommonDrawerState extends State<CommonDrawer> {
   List<String> drawerItems = [
     'Media',
-    'Articles',
     'Credit Limit',
     'WholeSale Setting',
     'Admin Support',
@@ -104,52 +103,49 @@ class _CommonDrawerState extends State<CommonDrawer> {
                       onTap: () {
                           switch (index) {
                             case 0:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/media/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/media/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 1:
-                              Get.snackbar('Status', "item ${index.toString()} taped.");
+                              _launchDrawerURL('https://traidbiz.com/store-manager/credit-limit/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 2:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/credit-limit/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/wholesale-setting/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 3:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/wholesale-setting/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/admin-support/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 4:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/admin-support/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/credit-report/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 5:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/credit-report/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/credit-shipping/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 6:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/credit-shipping/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/customers/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 7:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/customers/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/refund-requests/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 8:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/refund-requests/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/payments/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 9:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/payments/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/followers/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 10:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/followers/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/support/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 11:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/support/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/reports-sales-by-date/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 12:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/reports-sales-by-date/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/ledger/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 13:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/ledger/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/staffs/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
                             case 14:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/staffs/?login_userCookie=${widget.userCookie}&app_page=true');
-                              break;
-                            case 15:
-                              _launchDrawerURL('https://traidbiz.com/store-manager/coupons/?login_userCookie=${widget.userCookie}&app_page=true');
+                              _launchDrawerURL('https://traidbiz.com/store-manager/coupons/?login_cookie=${widget.userCookie}&app_page=true');
                               break;
 
                               // fOR lOGOUT
@@ -163,7 +159,8 @@ class _CommonDrawerState extends State<CommonDrawer> {
                     ),
                     const Divider()
                   ],
-                );}),
+                );
+                  }),
             )
     ],
     ),

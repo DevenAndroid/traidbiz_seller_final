@@ -32,6 +32,12 @@ class _$ProductModelTearOff {
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
+      //
+      @JsonKey(name: "weight") dynamic productWeight,
+      @JsonKey(name: "length") dynamic productLength,
+      @JsonKey(name: "width") dynamic productWidth,
+      @JsonKey(name: "height") dynamic productHeight,
+      //
       @JsonKey(name: "stock_quantity") dynamic quantity,
       @JsonKey(name: "tax_status") dynamic taxStatus,
       @JsonKey(name: "tax_class") dynamic taxClass,
@@ -49,6 +55,12 @@ class _$ProductModelTearOff {
       priceHtml: priceHtml,
       salePrice: salePrice,
       regularPrice: regularPrice,
+      //
+      productWeight: productWeight,
+      productLength: productLength,
+      productWidth: productWidth,
+      productHeight: productHeight,
+      //
       quantity: quantity,
       taxStatus: taxStatus,
       taxClass: taxClass,
@@ -87,6 +99,16 @@ mixin _$ProductModel {
   dynamic get salePrice => throw _privateConstructorUsedError;
   @JsonKey(name: "regular_price")
   dynamic get regularPrice => throw _privateConstructorUsedError;
+  //
+  @JsonKey(name: "weight")
+  dynamic get productWeight => throw _privateConstructorUsedError;
+  @JsonKey(name: "length")
+  dynamic get productLength => throw _privateConstructorUsedError;
+  @JsonKey(name: "width")
+  dynamic get productWidth => throw _privateConstructorUsedError;
+  @JsonKey(name: "height")
+  dynamic get productHeight => throw _privateConstructorUsedError;
+  //
   @JsonKey(name: "stock_quantity")
   dynamic get quantity => throw _privateConstructorUsedError;
   @JsonKey(name: "tax_status")
@@ -123,6 +145,12 @@ abstract class $ProductModelCopyWith<$Res> {
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
+        //
+      @JsonKey(name: "weight") dynamic productWeight,
+      @JsonKey(name: "length") dynamic productLength,
+      @JsonKey(name: "width") dynamic productWidth,
+      @JsonKey(name: "height") dynamic productHeight,
+      //
       @JsonKey(name: "stock_quantity") dynamic quantity,
       @JsonKey(name: "tax_status") dynamic taxStatus,
       @JsonKey(name: "tax_class") dynamic taxClass,
@@ -151,6 +179,10 @@ class _$ProductModelCopyWithImpl<$Res> implements $ProductModelCopyWith<$Res> {
     Object? priceHtml = freezed,
     Object? salePrice = freezed,
     Object? regularPrice = freezed,
+    Object? productWeight = freezed,
+    Object? productLength = freezed,
+    Object? productWidth = freezed,
+    Object? productHeight = freezed,
     Object? quantity = freezed,
     Object? taxStatus = freezed,
     Object? taxClass = freezed,
@@ -196,6 +228,24 @@ class _$ProductModelCopyWithImpl<$Res> implements $ProductModelCopyWith<$Res> {
           ? _value.regularPrice
           : regularPrice // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      //
+      productWeight: productWeight == freezed
+          ? _value.productWeight
+          : productWeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productLength: productLength == freezed
+          ? _value.productLength
+          : productLength // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productWidth: productWidth == freezed
+          ? _value.productWidth
+          : productWidth // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productHeight: productHeight == freezed
+          ? _value.productHeight
+          : productHeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      //
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -245,6 +295,12 @@ abstract class _$ProductModelCopyWith<$Res>
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
+        //
+      @JsonKey(name: "weight") dynamic productWeight,
+      @JsonKey(name: "length") dynamic productLength,
+      @JsonKey(name: "width") dynamic productWidth,
+      @JsonKey(name: "height") dynamic productHeight,
+      //
       @JsonKey(name: "stock_quantity") dynamic quantity,
       @JsonKey(name: "tax_status") dynamic taxStatus,
       @JsonKey(name: "tax_class") dynamic taxClass,
@@ -275,6 +331,12 @@ class __$ProductModelCopyWithImpl<$Res> extends _$ProductModelCopyWithImpl<$Res>
     Object? priceHtml = freezed,
     Object? salePrice = freezed,
     Object? regularPrice = freezed,
+    //
+    Object? productWeight = freezed,
+    Object? productLength = freezed,
+    Object? productWidth = freezed,
+    Object? productHeight = freezed,
+    //
     Object? quantity = freezed,
     Object? taxStatus = freezed,
     Object? taxClass = freezed,
@@ -320,6 +382,24 @@ class __$ProductModelCopyWithImpl<$Res> extends _$ProductModelCopyWithImpl<$Res>
           ? _value.regularPrice
           : regularPrice // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      //
+      productWeight: productWeight == freezed
+          ? _value.productWeight
+          : productWeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productLength: productLength == freezed
+          ? _value.productLength
+          : productLength // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productWidth: productWidth == freezed
+          ? _value.productWidth
+          : productWidth // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      productHeight: productHeight == freezed
+          ? _value.productHeight
+          : productHeight // ignore: cast_nullable_to_non_nullable
+      as dynamic,
+      //
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -365,6 +445,10 @@ class _$_ProductModel extends _ProductModel {
       @JsonKey(name: "price_html") this.priceHtml,
       @JsonKey(name: "sale_price") this.salePrice,
       @JsonKey(name: "regular_price") this.regularPrice,
+      @JsonKey(name: "weight") this.productWeight,
+      @JsonKey(name: "length") this.productLength,
+      @JsonKey(name: "width") this.productWidth,
+      @JsonKey(name: "height") this.productHeight,
       @JsonKey(name: "stock_quantity") this.quantity,
       @JsonKey(name: "tax_status") this.taxStatus,
       @JsonKey(name: "tax_class") this.taxClass,
@@ -404,6 +488,20 @@ class _$_ProductModel extends _ProductModel {
   @override
   @JsonKey(name: "regular_price")
   final dynamic regularPrice;
+  //
+  @override
+  @JsonKey(name: "weight")
+  final dynamic productWeight;
+  @override
+  @JsonKey(name: "length")
+  final dynamic productLength;
+  @override
+  @JsonKey(name: "width")
+  final dynamic productWidth;
+  @override
+  @JsonKey(name: "height")
+  final dynamic productHeight;
+  //
   @override
   @JsonKey(name: "stock_quantity")
   final dynamic quantity;
@@ -428,7 +526,7 @@ class _$_ProductModel extends _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, title: $title, type: $type, description: $description, imageUrl: $imageUrl, price: $price, priceHtml: $priceHtml, salePrice: $salePrice, regularPrice: $regularPrice, quantity: $quantity, taxStatus: $taxStatus, taxClass: $taxClass, categories: $categories, shippingClass: $shippingClass, minPrice: $minPrice, maxPrice: $maxPrice)';
+    return 'ProductModel(id: $id, title: $title, type: $type, description: $description, imageUrl: $imageUrl, price: $price, priceHtml: $priceHtml, salePrice: $salePrice, regularPrice: $regularPrice, productWeight: $productWeight, productLength: $productLength, productWidth: $productWidth, productHeight: $productHeight, quantity: $quantity, taxStatus: $taxStatus, taxClass: $taxClass, categories: $categories, shippingClass: $shippingClass, minPrice: $minPrice, maxPrice: $maxPrice)';
   }
 
   @override
@@ -439,14 +537,16 @@ class _$_ProductModel extends _ProductModel {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.priceHtml, priceHtml) &&
             const DeepCollectionEquality().equals(other.salePrice, salePrice) &&
-            const DeepCollectionEquality()
-                .equals(other.regularPrice, regularPrice) &&
+            const DeepCollectionEquality().equals(other.regularPrice, regularPrice) &&
+            const DeepCollectionEquality().equals(other.productWeight, productWeight) &&
+            const DeepCollectionEquality().equals(other.productLength, productLength) &&
+            const DeepCollectionEquality().equals(other.productWidth, productWidth) &&
+            const DeepCollectionEquality().equals(other.productHeight, productHeight) &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.taxStatus, taxStatus) &&
             const DeepCollectionEquality().equals(other.taxClass, taxClass) &&
@@ -470,12 +570,16 @@ class _$_ProductModel extends _ProductModel {
       const DeepCollectionEquality().hash(priceHtml),
       const DeepCollectionEquality().hash(salePrice),
       const DeepCollectionEquality().hash(regularPrice),
+      const DeepCollectionEquality().hash(productWeight),
+      const DeepCollectionEquality().hash(productLength),
+      const DeepCollectionEquality().hash(productWidth),
+      const DeepCollectionEquality().hash(productHeight),
       const DeepCollectionEquality().hash(quantity),
       const DeepCollectionEquality().hash(taxStatus),
       const DeepCollectionEquality().hash(taxClass),
       const DeepCollectionEquality().hash(categories),
       const DeepCollectionEquality().hash(shippingClass),
-      const DeepCollectionEquality().hash(minPrice),
+      // const DeepCollectionEquality().hash(minPrice),
       const DeepCollectionEquality().hash(maxPrice));
 
   @JsonKey(ignore: true)
@@ -500,6 +604,10 @@ abstract class _ProductModel extends ProductModel {
       @JsonKey(name: "price_html") dynamic priceHtml,
       @JsonKey(name: "sale_price") dynamic salePrice,
       @JsonKey(name: "regular_price") dynamic regularPrice,
+      @JsonKey(name: "weight") dynamic productWeight,
+      @JsonKey(name: "length") dynamic productLength,
+      @JsonKey(name: "width") dynamic productWidth,
+      @JsonKey(name: "height") dynamic productHeight,
       @JsonKey(name: "stock_quantity") dynamic quantity,
       @JsonKey(name: "tax_status") dynamic taxStatus,
       @JsonKey(name: "tax_class") dynamic taxClass,
@@ -537,8 +645,21 @@ abstract class _ProductModel extends ProductModel {
   @JsonKey(name: "sale_price")
   dynamic get salePrice;
   @override
-  @JsonKey(name: "regular_price")
-  dynamic get regularPrice;
+  @JsonKey(name: "regular_price")dynamic get regularPrice;
+
+  @override
+  @JsonKey(name: "weight")
+  dynamic get productWeight;
+  @override
+  @JsonKey(name: "length")
+  dynamic get productLength;
+  @override
+  @JsonKey(name: "width")
+  dynamic get productWidth;
+  @override
+  @JsonKey(name: "height")
+  dynamic get productHeight;
+
   @override
   @JsonKey(name: "stock_quantity")
   dynamic get quantity;

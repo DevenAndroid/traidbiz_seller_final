@@ -12,6 +12,7 @@ class StoreOrderDetail with _$StoreOrderDetail {
     @JsonKey(name: 'total_tax') String? totalTax,
     @JsonKey(name: 'total') String? orderTotal,
     @JsonKey(name: 'currency_symbol') String? currencySymbol,
+    @JsonKey(name: 'order_pdf') String? order_pdf,
     @JsonKey(name: 'payment_method_title') String? paymentMethodTitle,
     @JsonKey(name: 'date_created') String? createDate,
     @JsonKey(name: 'line_items') List<ProductLineItem>? lineItems,

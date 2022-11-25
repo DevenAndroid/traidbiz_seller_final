@@ -12,6 +12,7 @@ class StoreOrder with _$StoreOrder {
     @JsonKey(name: 'total') String? shippingTotal,
     @JsonKey(name: 'currency') String? currency,
     @JsonKey(name: 'currency_symbol') String? currencySymbol,
+    @JsonKey(name: 'order_pdf') String? order_pdf,
     @JsonKey(name: 'date_created') OrderDate? createDate,
   }) = _StoreOrder;
 

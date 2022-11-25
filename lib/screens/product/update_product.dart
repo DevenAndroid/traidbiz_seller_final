@@ -121,6 +121,62 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                               ]),
                               keyboardType: TextInputType.number,
                             ),
+                            //Newly added
+
+                            const SizedBox(height: 10),
+                            TextFormField(
+                              controller: controller.weightController,
+                              decoration: inputDecorationFilled.copyWith(
+                                hintText: 'Weight(Kg)',
+                              ),
+                              validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  return 'Please enter weight';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            TextFormField(
+                              controller: controller.lengthController,
+                              decoration: inputDecorationFilled.copyWith(
+                                hintText: 'Length',
+                              ),
+                              validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  return 'Please enter length';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            TextFormField(
+                              controller: controller.widthController,
+                              decoration: inputDecorationFilled.copyWith(
+                                hintText: 'Width',
+                              ),
+                              validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  return 'Please enter width';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            TextFormField(
+                              controller: controller.heightController,
+                              decoration: inputDecorationFilled.copyWith(
+                                hintText: 'Height',
+                              ),
+                              validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  return 'Please enter height';
+                                }
+                                return null;
+                              },
+                            ),
+
+                            //Newly added end
                             const SizedBox(height: 10),
                             Container(
                               height: 55,
@@ -316,7 +372,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
 
   void _updateProduct() async {
     final _response =
-        await controller.updateProduct(context, widget.fromCreate!);
+    await controller.updateProduct(context, widget.fromCreate!);
     if (_response['status'] == 'success') {
       Get.back();
       snack('Success', _response['message'], Icons.done);

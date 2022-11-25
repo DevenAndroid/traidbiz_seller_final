@@ -10,6 +10,12 @@ class CreateProductModel with _$CreateProductModel {
     @JsonKey(name: "product_name") String? productName,
     @JsonKey(name: "product_type") String? productType,
     @JsonKey(name: "product_price") String? productPrice,
+    //
+    @JsonKey(name: "weight") String? productWeight,
+    @JsonKey(name: "length") String? productLength,
+    @JsonKey(name: "width") String? productWidth,
+    @JsonKey(name: "height") String? productHeight,
+    //
     @JsonKey(name: "product_description") String? productDescription,
     @JsonKey(name: "categories") String? categories,
     @JsonKey(name: "product_image") String? productImage,

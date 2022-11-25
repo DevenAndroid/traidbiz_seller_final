@@ -76,7 +76,11 @@ class _MainScreenState extends State<MainScreen> {
           )
         ],
       ),
-      drawer: CommonDrawer('${controller.authCookie!.cookie}','${controller.authCookie?.user?.displayName}','${controller.authCookie?.user?.email}','${controller.authCookie?.user?.profileImage}'),
+      drawer: CommonDrawer(
+          '${controller.authCookie!.cookie}',
+          '${controller.authCookie?.user?.displayName}',
+          '${controller.authCookie?.user?.email}',
+          '${controller.authCookie?.user?.profileImage}'),
       body: IndexedStack(
         index: _index,
         children: List.generate(_screens.length, (index) => _screens[index]),

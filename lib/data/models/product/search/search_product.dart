@@ -15,6 +15,10 @@ class SearchProduct with _$SearchProduct {
     @JsonKey(name: "price_html") dynamic priceHtml,
     @JsonKey(name: "sale_price") dynamic salePrice,
     @JsonKey(name: "regular_price") dynamic regularPrice,
+    @JsonKey(name: "weight") dynamic productWeight,
+    @JsonKey(name: "length") dynamic productLength,
+    @JsonKey(name: "width") dynamic productWidth,
+    @JsonKey(name: "height") dynamic productHeight,
     @JsonKey(name: "stock_quantity") dynamic quantity,
   }) = _SearchProduct;
 

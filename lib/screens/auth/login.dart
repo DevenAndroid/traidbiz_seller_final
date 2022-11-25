@@ -18,141 +18,176 @@ class LoginScreen extends GetView<AuthController> {
       () => LoadingOverlay(
         isLoading: controller.isLoading,
         child: Scaffold(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Colors.white,
           body: Form(
             key: controller.authFormKey,
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(loginBackground), fit: BoxFit.cover),
-              ),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 10,
-                      right: 10,
-                      bottom: 20,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                        ),
-                        margin: const EdgeInsets.all(20),
-                        padding: const EdgeInsets.all(20),
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            Positioned(
-                              top: -70,
-                              right: 0,
-                              left: 0,
-                              child: Center(
-                                child: Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  padding: const EdgeInsets.all(4),
-                                  child: ClipOval(
-                                    child: Image.asset(loginAppIcon),
+            child: Stack(
+              children: [
+                Positioned(
+                    right: 0,
+                    left: 0,
+                    child: Image.asset("assets/images/login_BGNew.png")),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 10,
+                        right: 10,
+                        bottom: 20,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color(0xff054cfe),
+                          ),
+                          margin: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Positioned(
+                                top: -70,
+                                right: 0,
+                                left: 0,
+                                child: Center(
+                                  child: Container(
+                                    height: 100,
+                                    width: 100,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    padding: const EdgeInsets.all(4),
+                                    child: ClipOval(
+                                      child: Image.asset('assets/app/logonew.png'),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Column(
-                              children: [
-                                const SizedBox(height: 50),
-                                Text(
-                                  'LOG IN',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: colorPrimary,
-                                      ),
-                                ),
-                                const Text('Login to your account'),
-                                const SizedBox(height: 20),
-                                TextFormField(
-                                  controller: controller.usernameController,
-                                  decoration: inputDecoration.copyWith(
-                                    filled: true,
-                                    labelText: 'Email',
-                                    prefixIcon: const Icon(Icons.email),
+                              Column(
+                                children: [
+                                  const SizedBox(height: 50),
+                                  Text(
+                                    'LOG IN',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline5
+                                        ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "This field is required!";
-                                    } else if (!GetUtils.isEmail(value)) {
-                                      return "Please enter a valid email";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                                const SizedBox(height: 20),
-                                TextFormField(
-                                  controller: controller.passwordController,
-                                  decoration: inputDecoration.copyWith(
-                                    filled: true,
-                                    labelText: 'Password',
-                                    prefixIcon: const Icon(Icons.lock),
-                                    suffixIcon: IconButton(
-                                      onPressed: () {
-                                        controller.setIsPasswordVisible();
-                                      },
-                                      icon: Icon(
-                                        controller.isPasswordVisible
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
+                                  const Text('Login to your account',style: TextStyle(color: Colors.white),),
+                                  const SizedBox(height: 20),
+                                  TextFormField(
+                                    controller: controller.usernameController,
+                                    decoration: inputDecoration.copyWith(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      hintText: 'Email',
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                      prefixIcon: const Icon(Icons.email),
+                                      errorStyle: const TextStyle(color: Colors.white),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(width:1,color: Colors.yellow),
+                                        borderRadius: BorderRadius.circular(5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                          BorderSide(color: Colors.grey),
+                                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                                      border: OutlineInputBorder(
+                                          borderSide:  BorderSide(
+                                              color: Colors.grey, width: 2.0),
+                                          borderRadius: BorderRadius.circular(5.0)),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "This field is required!";
+                                      } else if (!GetUtils.isEmail(value)) {
+                                        return "Please enter a valid email";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                  ),
+                                  const SizedBox(height: 20),
+                                  TextFormField(
+                                    controller: controller.passwordController,
+                                    decoration: inputDecoration.copyWith(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      hintText: 'Password',
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                      prefixIcon: const Icon(Icons.lock),
+                                      errorStyle: const TextStyle(color: Colors.white),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(width:1,color: Colors.yellow),
+                                        borderRadius: BorderRadius.circular(5.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide:
+                                          BorderSide(color: Colors.grey),
+                                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                                      border: OutlineInputBorder(
+                                          borderSide:  BorderSide(
+                                              color: Colors.grey, width: 2.0),
+                                          borderRadius: BorderRadius.circular(5.0)),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          controller.setIsPasswordVisible();
+                                        },
+                                        icon: Icon(
+                                          controller.isPasswordVisible
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                        ),
+                                      ),
+                                    ),
+                                    obscureText: !controller.isPasswordVisible,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "This field is required!";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      onPressed: () => Get.to(
+                                            () => const ResetPasswordScreen(),
+                                      ),
+                                      child: Text(
+                                        'Forgot Password?',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  obscureText: !controller.isPasswordVisible,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "This field is required!";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: TextButton(
-                                    onPressed: () => Get.to(
-                                      () => const ResetPasswordScreen(),
-                                    ),
-                                    child: Text(
-                                      'Forgot Password?',
-                                      style: TextStyle(
-                                        color: colorPrimary.withOpacity(0.8),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      onPressed: _login,
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.orange,
                                       ),
+                                      child: const Text('LOG IN'),
                                     ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  height: 50,
-                                  child: ElevatedButton(
-                                    onPressed: _login,
-                                    child: const Text('LOG IN'),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),

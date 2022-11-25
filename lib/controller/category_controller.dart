@@ -20,9 +20,9 @@ class CategoryController extends GetxController
   bool get isLoading => _isLoading.value;
 
   final _categories = <ProductCategory>[].obs;
-  List<ProductCategory>? get categories => _categories;
 
-  List<ProductCategory> categorySearch = List.empty(growable: false);
+  List<ProductCategory>? get categories => _categories;
+  List<ProductCategory>? categorySearch = List.empty(growable: false);
 
 
 
@@ -36,7 +36,7 @@ class CategoryController extends GetxController
   void onInit() {
     super.onInit();
     _authCookie = AuthDb.getAuthCookie();
-    getProductCategories();
+    getProductCategories("");
   }
 
   void updateProductSelection(ProductCategory? category) {
@@ -56,15 +56,10 @@ class CategoryController extends GetxController
     update();
   }
 
-  Future<void> getProductCategories() async {
+  Future<void> getProductCategories(String search) async {
      print("APi get categories");
-    await repository.getProductCategories(
-      "${_authCookie?.user?.id}",
-      perPage: repositoriesPerPage,
-      pageNo: page,
-        // search: search
+    await repository.getProductCategories("${_authCookie?.user?.id}", perPage: repositoriesPerPage, pageNo: page, search: search
     ).then((result) {
-      print("Category list ADD");
       final bool emptyRepositories = result.categories?.isEmpty == true;
       if (!getFirstData && emptyRepositories) {
         change(null, status: RxStatus.empty());
@@ -72,12 +67,19 @@ class CategoryController extends GetxController
         lastPage = true;
       } else {
         getFirstData = true;
-        List<ProductCategory> temp = result.categories ?? [];
-        print("Re List"+ jsonEncode(result.categories).toString());
-        // _categories.clear();
-        _categories.addAll(temp);
+        if(search != "") {
+          _categories.clear();
+        }
+        _categories.addAll(result.categories!);
+        // List<ProductCategory> temp = result.categories ?? [];
+        // categorySearch = temp;
+        // print("Re List"+ jsonEncode(temp).toString());
+        // print("categorySearch"+ jsonEncode(categorySearch).toString());
+        // // _categories.clear();
+        // _categories.addAll(temp);
         // print(jsonEncode(_categories).toString());
         change(_categories, status: RxStatus.success());
+        update();
       }
       print("Category list ADD"+jsonEncode(_categories).toString());
     },
@@ -92,7 +94,7 @@ class CategoryController extends GetxController
     if (!lastPage) {
       page += 1;
       Get.dialog(const Center(child: CircularProgressIndicator()));
-      await getProductCategories();
+      await getProductCategories("");
       Get.back();
     } else {
       Get.snackbar('Alert', 'All Product Loaded!');

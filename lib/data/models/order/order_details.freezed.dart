@@ -29,6 +29,7 @@ class _$StoreOrderDetailTearOff {
       @JsonKey(name: 'shipping_total') String? shippingTotal,
       @JsonKey(name: 'total_tax') String? totalTax,
       @JsonKey(name: 'currency_symbol') String? currencySymbol,
+      @JsonKey(name: 'order_pdf') String? order_pdf,
       @JsonKey(name: 'payment_method_title') String? paymentMethodTitle,
       @JsonKey(name: 'date_created') String? createDate,
       @JsonKey(name: 'line_items') List<ProductLineItem>? lineItems,
@@ -41,6 +42,7 @@ class _$StoreOrderDetailTearOff {
       shippingTotal: shippingTotal,
       totalTax: totalTax,
       currencySymbol: currencySymbol,
+      order_pdf: order_pdf,
       paymentMethodTitle: paymentMethodTitle,
       createDate: createDate,
       lineItems: lineItems,
@@ -69,6 +71,8 @@ mixin _$StoreOrderDetail {
   String? get orderTotal => throw _privateConstructorUsedError;
   @JsonKey(name: 'currency_symbol')
   String? get currencySymbol => throw _privateConstructorUsedError;
+  @JsonKey(name: 'order_pdf')
+  String? get order_pdf => throw _privateConstructorUsedError;
   @JsonKey(name: 'payment_method_title')
   String? get paymentMethodTitle => throw _privateConstructorUsedError;
   @JsonKey(name: 'date_created')
@@ -97,6 +101,7 @@ abstract class $StoreOrderDetailCopyWith<$Res> {
       @JsonKey(name: 'shipping_total') String? shippingTotal,
       @JsonKey(name: 'total_tax') String? totalTax,
       @JsonKey(name: 'currency_symbol') String? currencySymbol,
+      @JsonKey(name: 'order_pdf') String? order_pdf,
       @JsonKey(name: 'payment_method_title') String? paymentMethodTitle,
       @JsonKey(name: 'date_created') String? createDate,
       @JsonKey(name: 'line_items') List<ProductLineItem>? lineItems,
@@ -122,6 +127,7 @@ class _$StoreOrderDetailCopyWithImpl<$Res>
     Object? shippingTotal = freezed,
     Object? totalTax = freezed,
     Object? currencySymbol = freezed,
+    Object? order_pdf = freezed,
     Object? paymentMethodTitle = freezed,
     Object? createDate = freezed,
     Object? lineItems = freezed,
@@ -148,6 +154,10 @@ class _$StoreOrderDetailCopyWithImpl<$Res>
       currencySymbol: currencySymbol == freezed
           ? _value.currencySymbol
           : currencySymbol // ignore: cast_nullable_to_non_nullable
+              as String?,
+      order_pdf: order_pdf == freezed
+          ? _value.order_pdf
+          : order_pdf // ignore: cast_nullable_to_non_nullable
               as String?,
       paymentMethodTitle: paymentMethodTitle == freezed
           ? _value.paymentMethodTitle
@@ -197,6 +207,7 @@ abstract class _$StoreOrderDetailCopyWith<$Res>
       @JsonKey(name: 'shipping_total') String? shippingTotal,
       @JsonKey(name: 'total_tax') String? totalTax,
       @JsonKey(name: 'currency_symbol') String? currencySymbol,
+      @JsonKey(name: 'order_pdf') String? order_pdf,
       @JsonKey(name: 'payment_method_title') String? paymentMethodTitle,
       @JsonKey(name: 'date_created') String? createDate,
       @JsonKey(name: 'line_items') List<ProductLineItem>? lineItems,
@@ -225,6 +236,7 @@ class __$StoreOrderDetailCopyWithImpl<$Res>
     Object? shippingTotal = freezed,
     Object? totalTax = freezed,
     Object? currencySymbol = freezed,
+    Object? order_pdf = freezed,
     Object? paymentMethodTitle = freezed,
     Object? createDate = freezed,
     Object? lineItems = freezed,
@@ -251,6 +263,10 @@ class __$StoreOrderDetailCopyWithImpl<$Res>
       currencySymbol: currencySymbol == freezed
           ? _value.currencySymbol
           : currencySymbol // ignore: cast_nullable_to_non_nullable
+              as String?,
+      order_pdf: order_pdf == freezed
+          ? _value.order_pdf
+          : order_pdf // ignore: cast_nullable_to_non_nullable
               as String?,
       paymentMethodTitle: paymentMethodTitle == freezed
           ? _value.paymentMethodTitle
@@ -287,6 +303,7 @@ class _$_StoreOrderDetail implements _StoreOrderDetail {
       @JsonKey(name: 'total_tax') this.totalTax,
       @JsonKey(name: 'total') this.orderTotal,
       @JsonKey(name: 'currency_symbol') this.currencySymbol,
+      @JsonKey(name: 'order_pdf') this.order_pdf,
       @JsonKey(name: 'payment_method_title') this.paymentMethodTitle,
       @JsonKey(name: 'date_created') this.createDate,
       @JsonKey(name: 'line_items') this.lineItems,
@@ -315,6 +332,9 @@ class _$_StoreOrderDetail implements _StoreOrderDetail {
   @JsonKey(name: 'currency_symbol')
   final String? currencySymbol;
   @override
+  @JsonKey(name: 'order_pdf')
+  final String? order_pdf;
+  @override
   @JsonKey(name: 'payment_method_title')
   final String? paymentMethodTitle;
   @override
@@ -332,7 +352,7 @@ class _$_StoreOrderDetail implements _StoreOrderDetail {
 
   @override
   String toString() {
-    return 'StoreOrderDetail(id: $id, status: $status, shippingTotal: $shippingTotal, totalTax: $totalTax, currencySymbol: $currencySymbol, paymentMethodTitle: $paymentMethodTitle, createDate: $createDate, lineItems: $lineItems, billing: $billing, shippingLines: $shippingLines)';
+    return 'StoreOrderDetail(id: $id, status: $status, shippingTotal: $shippingTotal, totalTax: $totalTax, currencySymbol: $currencySymbol, order_pdf: $order_pdf, paymentMethodTitle: $paymentMethodTitle, createDate: $createDate, lineItems: $lineItems, billing: $billing, shippingLines: $shippingLines)';
   }
 
   @override
@@ -345,8 +365,8 @@ class _$_StoreOrderDetail implements _StoreOrderDetail {
             const DeepCollectionEquality()
                 .equals(other.shippingTotal, shippingTotal) &&
             const DeepCollectionEquality().equals(other.totalTax, totalTax) &&
-            const DeepCollectionEquality()
-                .equals(other.currencySymbol, currencySymbol) &&
+            const DeepCollectionEquality().equals(other.currencySymbol, currencySymbol) &&
+            const DeepCollectionEquality().equals(other.order_pdf, order_pdf) &&
             const DeepCollectionEquality()
                 .equals(other.paymentMethodTitle, paymentMethodTitle) &&
             const DeepCollectionEquality()
@@ -365,6 +385,7 @@ class _$_StoreOrderDetail implements _StoreOrderDetail {
       const DeepCollectionEquality().hash(shippingTotal),
       const DeepCollectionEquality().hash(totalTax),
       const DeepCollectionEquality().hash(currencySymbol),
+      const DeepCollectionEquality().hash(order_pdf),
       const DeepCollectionEquality().hash(paymentMethodTitle),
       const DeepCollectionEquality().hash(createDate),
       const DeepCollectionEquality().hash(lineItems),
@@ -395,6 +416,8 @@ abstract class _StoreOrderDetail implements StoreOrderDetail {
         String? orderTotal,
       @JsonKey(name: 'currency_symbol')
           String? currencySymbol,
+      @JsonKey(name: 'order_pdf')
+          String? order_pdf,
       @JsonKey(name: 'payment_method_title')
           String? paymentMethodTitle,
       @JsonKey(name: 'date_created')
@@ -422,6 +445,9 @@ abstract class _StoreOrderDetail implements StoreOrderDetail {
   @override
   @JsonKey(name: 'currency_symbol')
   String? get currencySymbol;
+  @override
+  @JsonKey(name: 'order_pdf')
+  String? get order_pdf;
   @override
   @JsonKey(name: 'payment_method_title')
   String? get paymentMethodTitle;

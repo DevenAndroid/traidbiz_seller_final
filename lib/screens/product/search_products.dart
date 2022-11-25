@@ -60,6 +60,10 @@ class ProductItemWidget extends StatelessWidget {
           type: product?.type ?? "simple",
           price: product?.price ?? "0",
           regularPrice: product?.price ?? "0",
+          productWeight: product?.productWeight ?? "0",
+          productLength: product?.productLength ?? "0",
+          productWidth: product?.productWidth ?? "0",
+          productHeight: product?.productHeight ?? "0",
           quantity: product?.quantity ?? "0",
           description: product?.description ?? "",
         ));

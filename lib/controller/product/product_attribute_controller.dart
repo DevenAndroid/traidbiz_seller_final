@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traidbiz_seller/controller/product/product_detail_controller.dart';
-import 'package:traidbiz_seller/controller/product/product_variant_controller.dart';
-import 'package:traidbiz_seller/screens/product/update_product.dart';
 import 'package:traidbiz_seller/utils/snackbar.dart';
 import '../../data/models/product/variation_attributes/variation_attr.dart';
 import '/data/models/product/attribute/attribute.dart';

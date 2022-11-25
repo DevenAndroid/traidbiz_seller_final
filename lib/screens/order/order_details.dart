@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
@@ -20,8 +23,7 @@ class OrderDetailsScreen extends StatefulWidget {
 }
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
-  final StoreOrderController _storeOrderController =
-      Get.find<StoreOrderController>();
+  final StoreOrderController _storeOrderController = Get.find<StoreOrderController>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           builder: (context, AsyncSnapshot<StoreOrderDetail> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               StoreOrderDetail? order = snapshot.data;
+
+              log(jsonEncode(snapshot.data).toString());
 
               return Scaffold(
                 appBar: AppBar(title: const Text('Order Details')),
@@ -107,26 +111,41 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                 ),
                               ),
                               subtitle: Text(
-                                orderDetailsDateFormat.format(
-                                    DateTime.parse('${order?.createDate}')),
+                                orderDetailsDateFormat.format(DateTime.parse('${order?.createDate}')),
                               ),
-                              trailing: Container(
-                                decoration: BoxDecoration(
-                                  color: _statusMap(
-                                      order?.id, "${order?.status}")['color'],
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 4,
-                                ),
-                                child: Text(
-                                  _statusMap(
-                                      order?.id, "${order?.status}")['status'],
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                              trailing: Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: _statusMap(order?.id, "${order?.status}")['color'],
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
+                                    child: 
+                                    Text(
+                                      _statusMap(order?.id, "${order?.status}")['status'],
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  const SizedBox(height: 8,),
+                                  GestureDetector(
+                                      onTap: (){
+                                        var url = order?.order_pdf.toString();
+                                        launch(url.toString());
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
+                                          decoration: BoxDecoration(
+                                              color: Colors.deepOrange,
+                                            borderRadius: BorderRadius.circular(4),
+                                          ),
+                                          child: Text('Get Invoice',style: TextStyle(color: Colors.white),)))
+                                ],
                               ),
                             ),
                             OrderLineItems(order: order),

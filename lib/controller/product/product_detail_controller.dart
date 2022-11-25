@@ -61,6 +61,10 @@ class ProductDetailController extends GetxController
   // controllers
   final TextEditingController productNameController = TextEditingController();
   final TextEditingController regularPriceController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController lengthController = TextEditingController();
+  final TextEditingController widthController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
   final TextEditingController skuController = TextEditingController();
   final TextEditingController stockQuantityController = TextEditingController();
 
@@ -252,6 +256,10 @@ class ProductDetailController extends GetxController
           cookie: _authCookie?.cookie,
           productName: productNameController.text,
           productPrice: regularPriceController.text,
+          productWeight: weightController.text,
+          productLength: lengthController.text,
+          productWidth: widthController.text,
+          productHeight: heightController.text,
           productType: 'simple',
           productDescription: "",
           categories: _categories,
@@ -278,7 +286,7 @@ class ProductDetailController extends GetxController
               Get.find<CategoryController>();
           categoryController.categories!.clear();
           print("Category list cleared");
-          await categoryController.getProductCategories();
+          await categoryController.getProductCategories("");
           getAttributeDropDownValue(true);
         }
         snack('Message', _response['message'], Icons.message);
@@ -332,12 +340,19 @@ class ProductDetailController extends GetxController
           "product_name": productNameController.text,
           "product_type": productType?.toLowerCase(),
           "product_price": regularPriceController.text,
+          //
+          "weight": weightController.text,
+          "length": lengthController.text,
+          "width": widthController.text,
+          "height": heightController.text,
+          //
           "stock_quantity": stockQuantityController.text,
           "product_description": "",
           "categories": _categories,
           "shipping_class_id": selectedShippingClass.termId,
           "tax_status": selectedTaxStatus,
-          "tax_class": selectedTaxClass
+          "tax_class": selectedTaxClass,
+
         };
 
         if (!productImage.contains("http")) {
@@ -366,6 +381,10 @@ class ProductDetailController extends GetxController
   void gotoCreateProduct() async {
     productNameController.text = "";
     regularPriceController.text = "";
+    weightController.text = "";
+    lengthController.text = "";
+    widthController.text = "";
+    heightController.text = "";
     skuController.text = "";
     stockQuantityController.text = "";
     _productImage.value = "";
@@ -374,7 +393,7 @@ class ProductDetailController extends GetxController
     CategoryController categoryController = Get.find<CategoryController>();
     categoryController.categories!.clear();
     print("Category list cleared");
-    await categoryController.getProductCategories();
+    await categoryController.getProductCategories("");
     Get.to(() => const CreateProductScreen());
   }
 
@@ -387,6 +406,10 @@ class ProductDetailController extends GetxController
     _createdProductId.value = "${product?.id}";
     productNameController.text = "${product?.title}";
     regularPriceController.text = "${product?.price}";
+    weightController.text = "${product?.productWeight}";
+    lengthController.text = "${product?.productLength}";
+    widthController.text = "${product?.productWidth}";
+    heightController.text = "${product?.productHeight}";
     stockQuantityController.text = "${product?.quantity}";
     _productType.value = product?.type ?? 'simple';
     productImage = product?.imageUrl ?? "";
@@ -416,7 +439,7 @@ class ProductDetailController extends GetxController
     CategoryController categoryController = Get.find<CategoryController>();
     categoryController.categories!.clear();
     print("Category list cleared");
-    await categoryController.getProductCategories();
+    await categoryController.getProductCategories("");
     getAttributeDropDownValue(false);
     // getProductAttributeVariationTerms();
   }
