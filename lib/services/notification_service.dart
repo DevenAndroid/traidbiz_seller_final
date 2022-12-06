@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -27,15 +28,15 @@ class NotificationService {
     );
 
     // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+      // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
-    final InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
@@ -43,14 +44,13 @@ class NotificationService {
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onSelectNotification: selectNotification,
+     onDidReceiveNotificationResponse: onDidReceiveLocalNotification,
+      // onSelectNotification: selectNotification,
     );
 
     if (Platform.isAndroid) {
-      await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
-          ?.createNotificationChannel(channel);
+      await flutterLocalNotificationsPlugin.
+      resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
     }
     if (Platform.isIOS) {
       await flutterLocalNotificationsPlugin
@@ -88,7 +88,7 @@ class NotificationService {
           autoCancel: true,
           groupKey: 'com.traidbiz_seller.traidbiz_seller',
         ),
-        iOS: const IOSNotificationDetails(
+        iOS: const DarwinNotificationDetails(
           threadIdentifier: 'com.traidbiz_seller.traidbiz_seller',
           presentAlert: true,
           presentBadge: true,
@@ -99,20 +99,22 @@ class NotificationService {
     );
   }
 
-  Future<void> onDidReceiveLocalNotification(
-    int id,
-    String? title,
-    String? body,
-    String? payload,
+ void onDidReceiveLocalNotification(
+      NotificationResponse message
   ) async {
     debugPrint(":::: [Notification Service] Notification Received! ::::");
-    debugPrint("title:$title, body:$body, payload:$payload");
+    if(message.payload != null){
+      if (kDebugMode) {
+        print(message.payload.toString());
+      }
+    }
+    // debugPrint("title:$title, body:$body, payload:$payload");
   }
 
-  Future selectNotification(String? payload) async {
-    debugPrint(":::: [Notification Service] Payload: $payload ::::");
-    //Handle notification tapped logic here
-  }
+  // Future selectNotification(String? payload) async {
+  //   debugPrint(":::: [Notification Service] Payload: $payload ::::");
+  //   //Handle notification tapped logic here
+  // }
 
   static Future<void> initialize() async {
     NotificationSettings settings =

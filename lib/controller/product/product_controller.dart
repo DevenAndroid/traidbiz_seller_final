@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/data/models/product/product_model.dart';
@@ -31,8 +33,8 @@ class ProductController extends GetxController
         .getProducts(
       perPage: repositoriesPerPage,
       pageNo: page,
-    )
-        .then((result) {
+    ).then((result) {
+      log("products list result.... ${jsonEncode(result)}");
       final bool emptyRepositories = result.isEmpty;
 
       if (!getFirstData && emptyRepositories) {

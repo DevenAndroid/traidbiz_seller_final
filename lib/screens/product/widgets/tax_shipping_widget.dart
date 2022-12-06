@@ -44,8 +44,8 @@ class TaxAndShippingWidget extends GetView<ProductDetailController> {
                     items: List.generate(
                       controller.taxStatus.length,
                       (index) => DropdownMenuItem(
-                        child: Text(controller.taxStatus[index]),
                         value: controller.taxStatus[index],
+                        child: Text(controller.taxStatus[index]),
                       ),
                     ),
                     onChanged: (value) {
@@ -80,8 +80,8 @@ class TaxAndShippingWidget extends GetView<ProductDetailController> {
                     items: List.generate(
                       controller.taxClass.length,
                       (index) => DropdownMenuItem(
-                        child: Text(controller.taxClass[index]),
                         value: controller.taxClass[index],
+                        child: Text(controller.taxClass[index]),
                       ),
                     ),
                     onChanged: (value) {

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import '../../model/model_attribute_drop_down_value.dart';
 import '../../model/model_get_attribute_list.dart';
 import '../../repository/attribute_drop_down_repository.dart';
 import '../../repository/create_variation_attribute_repository.dart';
+import '../../repository/single_product_repo.dart';
 import '../../repository/variations_repo.dart';
 import '../../screens/product/create_product.dart';
 import '../category_controller.dart';
@@ -37,8 +39,8 @@ class ProductDetailController extends GetxController
   final _isLoading = false.obs;
   bool get isLoading => _isLoading.value;
 
-  final _isProductCreating = false.obs;
-  bool get isProductCreating => _isProductCreating.value;
+  // final _isProductCreating = ;
+  RxBool isProductCreating = false.obs;
 
   final _isProductUpdating = false.obs;
   bool get isProductUpdating => _isProductUpdating.value;
@@ -53,6 +55,8 @@ class ProductDetailController extends GetxController
   List<ProductCategory>? get categories => _categories;
   set categories(List<ProductCategory>? value) =>
       _categories.value = value ?? [];
+
+  String projectId = "";
 
   // form keys
   final GlobalKey<FormState> productFormKey = GlobalKey<FormState>();
@@ -246,7 +250,7 @@ class ProductDetailController extends GetxController
         return;
       }
 
-      _isProductCreating.value = true;
+      isProductCreating.value = true;
       update();
       try {
         debugPrint("Categories: $_categories");
@@ -281,9 +285,9 @@ class ProductDetailController extends GetxController
 
         final _response = await _repository.createNewProduct(_body);
         if (_response['status'] == 'success') {
+          projectId = _response['response']['id'].toString();
           _createdProductId.value = _response['response']['id'].toString();
-          CategoryController categoryController =
-              Get.find<CategoryController>();
+          CategoryController categoryController = Get.find<CategoryController>();
           categoryController.categories!.clear();
           print("Category list cleared");
           await categoryController.getProductCategories("");
@@ -293,7 +297,7 @@ class ProductDetailController extends GetxController
       } catch (e) {
         debugPrint("$e");
       } finally {
-        _isProductCreating.value = false;
+        isProductCreating.value = false;
         update();
 
         final _productController = Get.find<ProductController>();
@@ -336,7 +340,7 @@ class ProductDetailController extends GetxController
 
       try {
         final _body = {
-          "product_id": createdProductId,
+          "product_id": projectId,
           "product_name": productNameController.text,
           "product_type": productType?.toLowerCase(),
           "product_price": regularPriceController.text,
@@ -350,7 +354,7 @@ class ProductDetailController extends GetxController
           "product_description": "",
           "categories": _categories,
           "shipping_class_id": selectedShippingClass.termId,
-          "tax_status": selectedTaxStatus,
+          "tax_status": selectedTaxStatus.toLowerCase(),
           "tax_class": selectedTaxClass,
 
         };
@@ -363,9 +367,9 @@ class ProductDetailController extends GetxController
 
         debugPrint(_body.toString());
 
-        final _response = await _repository.updateProductInfo(_body);
+        final response = await _repository.updateProductInfo(_body);
         Helpers.hideLoader(loader);
-        return _response;
+        return response;
       } catch (e) {
         Helpers.hideLoader(loader);
         snack('Error', '$e', Icons.error);
@@ -392,7 +396,9 @@ class ProductDetailController extends GetxController
     _categories.value = [];
     CategoryController categoryController = Get.find<CategoryController>();
     categoryController.categories!.clear();
-    print("Category list cleared");
+    if (kDebugMode) {
+      print("Category list cleared");
+    }
     await categoryController.getProductCategories("");
     Get.to(() => const CreateProductScreen());
   }
@@ -400,45 +406,52 @@ class ProductDetailController extends GetxController
   void gotoUpdateProductScreen(
     ProductModel? product,
   ) async {
+    projectId = product!.id.toString();
+    createdProductId = product.id.toString();
     Get.dialog(const Center(
       child: CircularProgressIndicator(),
     ));
-    _createdProductId.value = "${product?.id}";
-    productNameController.text = "${product?.title}";
-    regularPriceController.text = "${product?.price}";
-    weightController.text = "${product?.productWeight}";
-    lengthController.text = "${product?.productLength}";
-    widthController.text = "${product?.productWidth}";
-    heightController.text = "${product?.productHeight}";
-    stockQuantityController.text = "${product?.quantity}";
-    _productType.value = product?.type ?? 'simple';
-    productImage = product?.imageUrl ?? "";
+    log("Single Product APi called");
+   await singleProductRepo(productId: product.id.toString()).then((value) {
+     weightController.text = "${value.productData!.weight}";
+     lengthController.text = "${value.productData!.length}";
+     widthController.text = "${value.productData!.width}";
+     heightController.text = "${value.productData!.height}";
+     log("Single Product APi called ${jsonEncode(value)}");
+   });
+    _createdProductId.value = "${product.id}";
+    productNameController.text = "${product.title}";
+    regularPriceController.text = "${product.price}";
+    stockQuantityController.text = "${product.quantity}";
+    _productType.value = product.type ?? 'simple';
+    productImage = product.imageUrl ?? "";
 
     clearProductAttribute();
     clearProductVariationAttributes();
 
-    categories =
-        product?.categories?.map((e) => e.copyWith(isSelected: true)).toList();
+    categories = product.categories?.map((e) => e.copyWith(isSelected: true)).toList();
 
     for (var element in shippingClasses) {
-      if (element.name?.contains(product?.shippingClass ?? '', 0) == true) {
+      if (element.name?.contains(product.shippingClass ?? '', 0) == true) {
         selectedShippingClass = element;
       }
     }
     for (var element in taxStatus) {
-      if (element.contains("${product?.taxStatus}", 0)) {
+      if (element.contains("${product.taxStatus}", 0)) {
         selectedTaxStatus = element;
       }
     }
-
     for (var element in taxClass) {
-      if (element.contains("${product?.taxClass}", 0)) {
+      if (element.contains("${product.taxClass}", 0)) {
         selectedTaxClass = element;
       }
     }
+
     CategoryController categoryController = Get.find<CategoryController>();
     categoryController.categories!.clear();
-    print("Category list cleared");
+    if (kDebugMode) {
+      print("Category list cleared");
+    }
     await categoryController.getProductCategories("");
     getAttributeDropDownValue(false);
     // getProductAttributeVariationTerms();

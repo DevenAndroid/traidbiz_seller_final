@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../data/models/product/shipping_class/shipping.dart';
 
 mixin ProductTaxController on GetxController {
-  final List<String> _taxStatus = ["Taxable", "Shipping Only", "None"];
+  final List<String> _taxStatus = ["Taxable", "Shipping", "None"];
   List<String> get taxStatus => _taxStatus;
 
   final _selectedTaxStatus = "Taxable".obs;

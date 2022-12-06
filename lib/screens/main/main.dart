@@ -38,203 +38,205 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final formatter = DateFormat('dd MMM, yyy');
-    return _index==2
-        ? controller.obx(
-          (state) => Scaffold(
-      appBar: AppBar(
-        // leading: Builder(
-        //   builder: (context) => IconButton(
-        //     icon: const Icon(
-        //       PhosphorIcons.list_bold,
-        //       color: Colors.black,
-        //     ),
-        //     onPressed: () => Scaffold.of(context).openDrawer(),
-        //   ),
-        // ),
-        // leadingWidth: 44,
-        centerTitle: false,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Hi! ${controller.authCookie?.user?.displayName}'),
-            Text(formatter.format(DateTime.now()),
-              style: Theme.of(context).textTheme.caption,
-            ),
-          ],
-        ),
-        actions: [
-          GestureDetector(
-            onTap: (() => Get.to(() => const ProfileScreen())),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(
-                  '${controller.authCookie?.user?.profileImage}',
+    return _index == 2
+        ? controller.obx((state) => Scaffold(
+              appBar: AppBar(
+                // leading: Builder(
+                //   builder: (context) => IconButton(
+                //     icon: const Icon(
+                //       PhosphorIcons.list_bold,
+                //       color: Colors.black,
+                //     ),
+                //     onPressed: () => Scaffold.of(context).openDrawer(),
+                //   ),
+                // ),
+                // leadingWidth: 44,
+                centerTitle: false,
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Hi! ${controller.authCookie?.user?.displayName}'),
+                    Text(
+                      formatter.format(DateTime.now()),
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                  ],
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: (() => Get.to(() => const ProfileScreen())),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                          '${controller.authCookie?.user?.profileImage}',
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              drawer: CommonDrawer(
+                  '${controller.authCookie!.cookie}',
+                  '${controller.authCookie?.user?.displayName}',
+                  '${controller.authCookie?.user?.email}',
+                  '${controller.authCookie?.user?.profileImage}'),
+              body: IndexedStack(
+                index: _index,
+                children:
+                    List.generate(_screens.length, (index) => _screens[index]),
+              ),
+              resizeToAvoidBottomInset: false,
+              bottomNavigationBar: Container(
+                decoration: const BoxDecoration(color: Colors.white),
+                padding: const EdgeInsets.only(bottom: 10),
+                height: kBottomNavigationBarHeight + 30,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    BottomNavButtonWidget(
+                      onTap: () {
+                        setState(() {
+                          _index = 0;
+                        });
+                      },
+                      icon: PhosphorIcons.package,
+                      text: 'Product',
+                      isSelected: _index == 0,
+                    ),
+                    BottomNavButtonWidget(
+                      onTap: () {
+                        setState(() {
+                          notificationController.getData();
+                          _index = 1;
+                        });
+                      },
+                      icon: Icons.notifications,
+                      text: 'Notification',
+                      isSelected: _index == 1,
+                    ),
+                    BottomNavCenterButtonWidget(
+                      onTap: () {
+                        setState(() {
+                          _index = 2;
+                        });
+                      },
+                      icon: CustomPaint(
+                        painter: SelectedNavShape(),
+                        child: const SizedBox(
+                          height: 45,
+                          width: 40,
+                          child: Icon(
+                            Icons.dashboard,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    BottomNavButtonWidget(
+                      onTap: () {
+                        setState(() {
+                          _index = 3;
+                        });
+                      },
+                      icon: Icons.list_alt,
+                      text: 'Orders',
+                      isSelected: _index == 3,
+                    ),
+                    BottomNavButtonWidget(
+                      onTap: () {
+                        setState(() {
+                          _index = 4;
+                        });
+                      },
+                      icon: Icons.settings,
+                      text: 'Settings',
+                      isSelected: _index == 4,
+                    ),
+                  ],
                 ),
               ),
-            ),
-          )
-        ],
-      ),
-      drawer: CommonDrawer(
-          '${controller.authCookie!.cookie}',
-          '${controller.authCookie?.user?.displayName}',
-          '${controller.authCookie?.user?.email}',
-          '${controller.authCookie?.user?.profileImage}'),
-      body: IndexedStack(
-        index: _index,
-        children: List.generate(_screens.length, (index) => _screens[index]),
-      ),
-      resizeToAvoidBottomInset: false,
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(color: Colors.white),
-        padding: const EdgeInsets.only(bottom: 10),
-        height: kBottomNavigationBarHeight + 30,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 0;
-                });
-              },
-              icon: PhosphorIcons.package,
-              text: 'Product',
-              isSelected: _index == 0,
-            ),
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  notificationController.getData();
-                  _index = 1;
-                });
-              },
-              icon: Icons.notifications,
-              text: 'Notification',
-              isSelected: _index == 1,
-            ),
-            BottomNavCenterButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 2;
-                });
-              },
-              icon: CustomPaint(
-                painter: SelectedNavShape(),
-                child: const SizedBox(
-                  height: 45,
-                  width: 40,
-                  child: Icon(
-                    Icons.dashboard,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 3;
-                });
-              },
-              icon: Icons.list_alt,
-              text: 'Orders',
-              isSelected: _index == 3,
-            ),
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 4;
-                });
-              },
-              icon: Icons.settings,
-              text: 'Settings',
-              isSelected: _index == 4,
-            ),
-          ],
-        ),
-      ),
-    ))
+            ))
         : Scaffold(
-      body: IndexedStack(
-        index: _index,
-        children: List.generate(_screens.length, (index) => _screens[index]),
-      ),
-      resizeToAvoidBottomInset: false,
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(color: Colors.white),
-        padding: const EdgeInsets.only(bottom: 10),
-        height: kBottomNavigationBarHeight + 30,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 0;
-                });
-              },
-              icon: PhosphorIcons.package,
-              text: 'Product',
-              isSelected: _index == 0,
+            body: IndexedStack(
+              index: _index,
+              children:
+                  List.generate(_screens.length, (index) => _screens[index]),
             ),
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  notificationController.getData();
-                  _index = 1;
-                });
-              },
-              icon: Icons.notifications,
-              text: 'Notification',
-              isSelected: _index == 1,
-            ),
-            BottomNavCenterButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 2;
-                });
-              },
-              icon: CustomPaint(
-                painter: SelectedNavShape(),
-                child: const SizedBox(
-                  height: 45,
-                  width: 40,
-                  child: Icon(
-                    Icons.dashboard,
-                    color: Colors.white,
+            resizeToAvoidBottomInset: false,
+            bottomNavigationBar: Container(
+              decoration: const BoxDecoration(color: Colors.white),
+              padding: const EdgeInsets.only(bottom: 10),
+              height: kBottomNavigationBarHeight + 30,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  BottomNavButtonWidget(
+                    onTap: () {
+                      setState(() {
+                        _index = 0;
+                      });
+                    },
+                    icon: PhosphorIcons.package,
+                    text: 'Product',
+                    isSelected: _index == 0,
                   ),
-                ),
+                  BottomNavButtonWidget(
+                    onTap: () {
+                      setState(() {
+                        notificationController.getData();
+                        _index = 1;
+                      });
+                    },
+                    icon: Icons.notifications,
+                    text: 'Notification',
+                    isSelected: _index == 1,
+                  ),
+                  BottomNavCenterButtonWidget(
+                    onTap: () {
+                      setState(() {
+                        _index = 2;
+                      });
+                    },
+                    icon: CustomPaint(
+                      painter: SelectedNavShape(),
+                      child: const SizedBox(
+                        height: 45,
+                        width: 40,
+                        child: Icon(
+                          Icons.dashboard,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  BottomNavButtonWidget(
+                    onTap: () {
+                      setState(() {
+                        _index = 3;
+                      });
+                    },
+                    icon: Icons.list_alt,
+                    text: 'Orders',
+                    isSelected: _index == 3,
+                  ),
+                  BottomNavButtonWidget(
+                    onTap: () {
+                      setState(() {
+                        _index = 4;
+                      });
+                    },
+                    icon: Icons.settings,
+                    text: 'Settings',
+                    isSelected: _index == 4,
+                  ),
+                ],
               ),
             ),
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 3;
-                });
-              },
-              icon: Icons.list_alt,
-              text: 'Orders',
-              isSelected: _index == 3,
-            ),
-            BottomNavButtonWidget(
-              onTap: () {
-                setState(() {
-                  _index = 4;
-                });
-              },
-              icon: Icons.settings,
-              text: 'Settings',
-              isSelected: _index == 4,
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

@@ -30,7 +30,7 @@ class CreateProductScreen extends GetView<ProductDetailController> {
           ],
         ),
         body: LoadingOverlay(
-          isLoading: controller.isProductCreating,
+          isLoading: controller.isProductCreating.value,
           child: Form(
             key: controller.productFormKey,
             child: SingleChildScrollView(

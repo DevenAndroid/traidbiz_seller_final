@@ -85,19 +85,19 @@ class LoginScreen extends GetView<AuthController> {
                                       filled: true,
                                       fillColor: Colors.white,
                                       hintText: 'Email',
-                                      hintStyle: TextStyle(color: Colors.grey),
+                                      hintStyle: const TextStyle(color: Colors.grey),
                                       prefixIcon: const Icon(Icons.email),
                                       errorStyle: const TextStyle(color: Colors.white),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width:1,color: Colors.yellow),
+                                        borderSide: const BorderSide(width:1,color: Colors.yellow),
                                         borderRadius: BorderRadius.circular(5.0),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
+                                      enabledBorder: const OutlineInputBorder(
                                           borderSide:
                                           BorderSide(color: Colors.grey),
                                           borderRadius: BorderRadius.all(Radius.circular(5.0))),
                                       border: OutlineInputBorder(
-                                          borderSide:  BorderSide(
+                                          borderSide:  const BorderSide(
                                               color: Colors.grey, width: 2.0),
                                           borderRadius: BorderRadius.circular(5.0)),
                                     ),
@@ -118,19 +118,19 @@ class LoginScreen extends GetView<AuthController> {
                                       filled: true,
                                       fillColor: Colors.white,
                                       hintText: 'Password',
-                                      hintStyle: TextStyle(color: Colors.grey),
+                                      hintStyle: const TextStyle(color: Colors.grey),
                                       prefixIcon: const Icon(Icons.lock),
                                       errorStyle: const TextStyle(color: Colors.white),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(width:1,color: Colors.yellow),
+                                        borderSide: const BorderSide(width:1,color: Colors.yellow),
                                         borderRadius: BorderRadius.circular(5.0),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
+                                      enabledBorder: const OutlineInputBorder(
                                           borderSide:
                                           BorderSide(color: Colors.grey),
                                           borderRadius: BorderRadius.all(Radius.circular(5.0))),
                                       border: OutlineInputBorder(
-                                          borderSide:  BorderSide(
+                                          borderSide:  const BorderSide(
                                               color: Colors.grey, width: 2.0),
                                           borderRadius: BorderRadius.circular(5.0)),
                                       suffixIcon: IconButton(
@@ -159,7 +159,7 @@ class LoginScreen extends GetView<AuthController> {
                                       onPressed: () => Get.to(
                                             () => const ResetPasswordScreen(),
                                       ),
-                                      child: Text(
+                                      child: const Text(
                                         'Forgot Password?',
                                         style: TextStyle(
                                           color: Colors.white,

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +14,7 @@ import '../../constraints/styles.dart';
 import '../../controller/category_controller.dart';
 import '../../controller/product/product_controller.dart';
 import '../../controller/product/product_detail_controller.dart';
+import '../../repository/single_product_repo.dart';
 import '../../utils/snackbar.dart';
 import 'index.dart';
 
@@ -49,7 +51,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
             ],
           ),
           body: LoadingOverlay(
-            isLoading: controller.isProductCreating,
+            isLoading: controller.isProductCreating.value,
             child: Form(
               key: controller.updateProductFormKey,
               child: SingleChildScrollView(
@@ -344,8 +346,49 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                         ),
                       ),
                     ),
+
                     const SizedBox(height: 20),
+                    // Tax
                     const TaxAndShippingWidget(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 10,
+                      ),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if(controller.updateProductFormKey.currentState!.validate()){
+                              controller.isProductCreating.value = true;
+                              calculatePrice(
+                                productId: controller.projectId,
+                                regularPrice: controller.regularPriceController.text.trim(),
+                                width: controller.widthController.text.trim(),
+                                height: controller.heightController.text.trim(),
+                                length: controller.lengthController.text.trim(),
+                                weight: controller.weightController.text.trim()
+                              ).then((value) {
+                                controller.isProductCreating.value = false;
+                                controller.regularPriceController.text =
+                                    value.data!.priceWithShipping ?? controller.regularPriceController.text;
+                                Fluttertoast.showToast(msg: "Price Updated");
+                                setState(() {});
+                              });
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ), backgroundColor: colorSecondary,
+                          ),
+                          child: const Text('Calculate Price'),
+                        ),
+                      ),
+                    ),
+
+                    // Below Part
                     Visibility(
                       visible:
                           controller.productType?.toLowerCase() == 'variable',
