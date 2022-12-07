@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart' as _dio;
@@ -5,8 +6,8 @@ import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traidbiz_seller/controller/home_controller.dart';
-import 'package:traidbiz_seller/data/models/user/user.dart';
 import 'package:traidbiz_seller/data/repository/store_repository.dart';
+import '../repository/create_variation_attribute_repository.dart';
 import '/data/local/auth_db.dart';
 import '/utils/snackbar.dart';
 import '/constraints/api_endpoints.dart';
@@ -27,9 +28,27 @@ class StoreSettingsController extends GetxController {
   StoreProfileInfo get storeSettings => _storeSettings.value;
 
   // controllers
-  final TextEditingController storeNameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController storeAddressController = TextEditingController();
   final TextEditingController storePhoneController = TextEditingController();
+
+  final TextEditingController storeSlugController = TextEditingController();
+  final TextEditingController shopDescriptionController = TextEditingController();
+  // final TextEditingController streetController = TextEditingController();
+  final TextEditingController street2Controller = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController postcodeController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
+  final TextEditingController stateController = TextEditingController();
+  final TextEditingController twitterController = TextEditingController();
+  final TextEditingController facebookController = TextEditingController();
+  final TextEditingController instagramController = TextEditingController();
+  final TextEditingController youtubeController = TextEditingController();
+  final TextEditingController linkedinController = TextEditingController();
+  final TextEditingController whatsappController = TextEditingController();
+  final TextEditingController viberController = TextEditingController();
+  final TextEditingController tikTokController = TextEditingController();
+  final TextEditingController creditShippingZoneController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
 
@@ -70,22 +89,21 @@ class StoreSettingsController extends GetxController {
   }
 
   Future<void> getStoreProfileInfo() async {
-    final _response = await _repository.getStoreProfileInfo();
-    _storeSettings.value = _response;
-    storeNameController.text =
-        _storeSettings.value.storeProfile?.storeName ?? '';
-    storeAddressController.text =
-        _storeSettings.value.storeProfile?.location ?? '';
+
+    final response = await _repository.getStoreProfileInfo();
+    _storeSettings.value = response;
+    nameController.text = _storeSettings.value.storeProfile?.storeName ?? '';
+    storeAddressController.text = _storeSettings.value.storeProfile?.location ?? '';
     storePhoneController.text = _storeSettings.value.storeProfile?.phone ?? '';
     storeLogoImagePath.value = _storeSettings.value.storeProfile?.logoUrl ?? '';
-    storeBannerImagePath.value =
-        _storeSettings.value.storeProfile?.bannerUrl ?? '';
+    storeBannerImagePath.value = _storeSettings.value.storeProfile?.bannerUrl ?? '';
 
-    HomeController _controller = Get.find<HomeController>();
-    AuthController _authController = Get.find<AuthController>();
 
-    _controller.updateUserProfileFromStoreSettings(_response);
-    _authController.updateProfile();
+    HomeController controller = Get.find<HomeController>();
+    AuthController authController = Get.find<AuthController>();
+
+    controller.updateUserProfileFromStoreSettings(response);
+    authController.updateProfile();
     update();
   }
 
@@ -96,29 +114,57 @@ class StoreSettingsController extends GetxController {
       try {
         final _logo = await _storeLogo?.readAsBytes();
         final _banner = await _storeBanner?.readAsBytes();
-        final _body = StoreSettings(
-          cookie: "${AuthDb.getAuthCookie()?.cookie}",
-          name: storeNameController.text,
-          address: storeAddressController.text,
-          banner: _banner != null ? convert.base64Encode(_banner) : null,
-          logo: _logo != null ? convert.base64Encode(_logo) : null,
-          phone: storePhoneController.text,
-        ).toJson();
+        Map<String, dynamic> map = {};
+        map["cookie"] = "${AuthDb.getAuthCookie()?.cookie}";
+        map["name"] = nameController.text;
+        map["address"] = storeAddressController.text;
+        map["banner"] = _banner != null ? convert.base64Encode(_banner) : null;
+        map["logo"] = _logo != null ? convert.base64Encode(_logo) : null;
+        map["phone"] = storePhoneController.text;
+        map["store_slug"] = storeSlugController.text;
+        map["shop_description"] = shopDescriptionController.text;
+        // map["street"] = streetController.text;
+        map["street_2"] = street2Controller.text;
+        map["city"] = cityController.text;
+        map["postcode"] = postcodeController.text;
+        map["country"] = countryController.text;
+        map["state"] = stateController.text;
+        map["twitter"] = twitterController.text;
+        map["facebook"] = facebookController.text;
+        map["instagram"] = instagramController.text;
+        map["youtube"] = youtubeController.text;
+        map["linkedin"] = linkedinController.text;
+        map["whatsapp"] = whatsappController.text;
+        map["viber"] = viberController.text;
+        map["tik_tok"] = tikTokController.text;
+        map["credit_shipping_zone"] = creditShippingZoneController.text;
 
-        debugPrint(_body.toString());
+
+            // final _body =
+        // StoreSettings(
+        //   cookie: "${AuthDb.getAuthCookie()?.cookie}",
+        //   name: nameController.text,
+        //   address: storeAddressController.text,
+        //   banner: _banner != null ? convert.base64Encode(_banner) : null,
+        //   logo: _logo != null ? convert.base64Encode(_logo) : null,
+        //   phone: storePhoneController.text,
+        //
+        // ).toJson();
+
+        debugPrint(jsonEncode(map));
 
         final _response = await ApiService.post(
           storeSettingsApi,
           client,
-          body: _body,
+          body: jsonEncode(map),
         );
 
-        final _settings = StoreSettingsResponse.fromJson(_response);
-        if (_settings.status == 'success') {
-          snack('Success', "${_settings.message}", Icons.done);
+        final settings = StoreSettingsResponse.fromJson(_response);
+        if (settings.status == 'success') {
+          snack('Success', "${settings.message}", Icons.done);
           getStoreProfileInfo();
         } else {
-          log("${_settings.message}");
+          log("${settings.message}");
           snack('Failed', "Upload failed", Icons.error);
         }
       } catch (e) {
@@ -133,3 +179,120 @@ class StoreSettingsController extends GetxController {
     }
   }
 }
+
+class ModelStoreSettings {
+  String? status;
+  Response? response;
+
+  ModelStoreSettings({this.status, this.response});
+
+  ModelStoreSettings.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    response = json['response'] != null
+        ? Response.fromJson(json['response'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    if (response != null) {
+      data['response'] = response!.toJson();
+    }
+    return data;
+  }
+}
+
+class Response {
+  dynamic storeName;
+  dynamic phone;
+  dynamic address;
+  dynamic logoUrl;
+  dynamic bannerUrl;
+  dynamic storeSlug;
+  dynamic shopDescription;
+  dynamic street2;
+  dynamic city;
+  dynamic postcode;
+  dynamic state;
+  dynamic creditShippingZone;
+  dynamic twitter;
+  dynamic facebook;
+  dynamic instagram;
+  dynamic youtube;
+  dynamic linkedin;
+  dynamic whatsapp;
+  dynamic viber;
+  dynamic tikTok;
+
+  Response(
+      {this.storeName,
+        this.phone,
+        this.address,
+        this.logoUrl,
+        this.bannerUrl,
+        this.storeSlug,
+        this.shopDescription,
+        this.street2,
+        this.city,
+        this.postcode,
+        this.state,
+        this.creditShippingZone,
+        this.twitter,
+        this.facebook,
+        this.instagram,
+        this.youtube,
+        this.linkedin,
+        this.whatsapp,
+        this.viber,
+        this.tikTok});
+
+  Response.fromJson(Map<String, dynamic> json) {
+    storeName = json['store_name'];
+    phone = json['phone'];
+    address = json['address'];
+    logoUrl = json['logo_url'];
+    bannerUrl = json['banner_url'];
+    storeSlug = json['store_slug'];
+    shopDescription = json['shop_description'];
+    street2 = json['street_2'];
+    city = json['city'];
+    postcode = json['postcode'];
+    state = json['state'];
+    creditShippingZone = json['credit_shipping_zone'];
+    twitter = json['twitter'];
+    facebook = json['facebook'];
+    instagram = json['instagram'];
+    youtube = json['youtube'];
+    linkedin = json['linkedin'];
+    whatsapp = json['whatsapp'];
+    viber = json['viber'];
+    tikTok = json['tik_tok'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['store_name'] = storeName;
+    data['phone'] = phone;
+    data['address'] = address;
+    data['logo_url'] = logoUrl;
+    data['banner_url'] = bannerUrl;
+    data['store_slug'] = storeSlug;
+    data['shop_description'] = shopDescription;
+    data['street_2'] = street2;
+    data['city'] = city;
+    data['postcode'] = postcode;
+    data['state'] = state;
+    data['credit_shipping_zone'] = creditShippingZone;
+    data['twitter'] = twitter;
+    data['facebook'] = facebook;
+    data['instagram'] = instagram;
+    data['youtube'] = youtube;
+    data['linkedin'] = linkedin;
+    data['whatsapp'] = whatsapp;
+    data['viber'] = viber;
+    data['tik_tok'] = tikTok;
+    return data;
+  }
+}
+

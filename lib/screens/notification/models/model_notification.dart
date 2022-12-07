@@ -52,14 +52,16 @@ class Data {
 class Notifications {
   String? date;
   String? title;
+  dynamic order_id;
   String? description;
   String? icon;
 
-  Notifications({this.date, this.title, this.description, this.icon});
+  Notifications({this.date, this.title, this.description, this.icon,this.order_id});
 
   Notifications.fromJson(Map<String, dynamic> json) {
     date = json['date'];
     title = json['title'];
+    order_id = json['order_id'];
     description = json['description'];
     icon = json['icon'];
   }
@@ -68,6 +70,7 @@ class Notifications {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['date'] = date;
     data['title'] = title;
+    data['order_id'] = order_id;
     data['description'] = description;
     data['icon'] = icon;
     return data;

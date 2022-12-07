@@ -28,11 +28,11 @@ class _MainScreenState extends State<MainScreen> {
   final notificationController = Get.put(NotificationController());
   int _index = 2;
   final List<Widget> _screens = [
-    ProductsScreen(),
-    NotificationScreen(),
-    HomeScreen(),
-    OrderScreen(),
-    SettingScreen(),
+    const ProductsScreen(),
+    const NotificationScreen(),
+    const HomeScreen(),
+    const OrderScreen(),
+    const SettingScreen(),
   ];
 
   @override
