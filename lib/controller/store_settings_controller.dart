@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:dio/dio.dart' as _dio;
+import 'package:dio/dio.dart' as dio;
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traidbiz_seller/controller/home_controller.dart';
 import 'package:traidbiz_seller/data/repository/store_repository.dart';
-import '../repository/create_variation_attribute_repository.dart';
 import '/data/local/auth_db.dart';
 import '/utils/snackbar.dart';
 import '/constraints/api_endpoints.dart';
@@ -49,6 +48,8 @@ class StoreSettingsController extends GetxController {
   final TextEditingController viberController = TextEditingController();
   final TextEditingController tikTokController = TextEditingController();
   final TextEditingController creditShippingZoneController = TextEditingController();
+
+  RxString countryCode = "".obs;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -110,16 +111,16 @@ class StoreSettingsController extends GetxController {
   Future<void> saveStoreSettings() async {
     if (storeSettingsFormKey.currentState?.validate() == true) {
       _isLoading.value = true;
-      var client = _dio.Dio();
+      var client = dio.Dio();
       try {
-        final _logo = await _storeLogo?.readAsBytes();
-        final _banner = await _storeBanner?.readAsBytes();
+        final logo = await _storeLogo?.readAsBytes();
+        final banner = await _storeBanner?.readAsBytes();
         Map<String, dynamic> map = {};
         map["cookie"] = "${AuthDb.getAuthCookie()?.cookie}";
         map["name"] = nameController.text;
         map["address"] = storeAddressController.text;
-        map["banner"] = _banner != null ? convert.base64Encode(_banner) : null;
-        map["logo"] = _logo != null ? convert.base64Encode(_logo) : null;
+        map["banner"] = banner != null ? convert.base64Encode(banner) : null;
+        map["logo"] = logo != null ? convert.base64Encode(logo) : null;
         map["phone"] = storePhoneController.text;
         map["store_slug"] = storeSlugController.text;
         map["shop_description"] = shopDescriptionController.text;
@@ -127,7 +128,7 @@ class StoreSettingsController extends GetxController {
         map["street_2"] = street2Controller.text;
         map["city"] = cityController.text;
         map["postcode"] = postcodeController.text;
-        map["country"] = countryController.text;
+        map["country"] = countryCode.value;
         map["state"] = stateController.text;
         map["twitter"] = twitterController.text;
         map["facebook"] = facebookController.text;
@@ -153,13 +154,13 @@ class StoreSettingsController extends GetxController {
 
         debugPrint(jsonEncode(map));
 
-        final _response = await ApiService.post(
+        final response = await ApiService.post(
           storeSettingsApi,
           client,
           body: jsonEncode(map),
         );
 
-        final settings = StoreSettingsResponse.fromJson(_response);
+        final settings = StoreSettingsResponse.fromJson(response);
         if (settings.status == 'success') {
           snack('Success', "${settings.message}", Icons.done);
           getStoreProfileInfo();
@@ -180,6 +181,8 @@ class StoreSettingsController extends GetxController {
   }
 }
 
+
+
 class ModelStoreSettings {
   String? status;
   Response? response;
@@ -194,7 +197,7 @@ class ModelStoreSettings {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['status'] = status;
     if (response != null) {
       data['response'] = response!.toJson();
@@ -204,26 +207,27 @@ class ModelStoreSettings {
 }
 
 class Response {
-  dynamic storeName;
-  dynamic phone;
-  dynamic address;
-  dynamic logoUrl;
-  dynamic bannerUrl;
-  dynamic storeSlug;
-  dynamic shopDescription;
-  dynamic street2;
-  dynamic city;
-  dynamic postcode;
-  dynamic state;
-  dynamic creditShippingZone;
-  dynamic twitter;
-  dynamic facebook;
-  dynamic instagram;
-  dynamic youtube;
-  dynamic linkedin;
-  dynamic whatsapp;
-  dynamic viber;
-  dynamic tikTok;
+  String? storeName;
+  String? phone;
+  String? address;
+  String? logoUrl;
+  String? bannerUrl;
+  String? storeSlug;
+  String? shopDescription;
+  String? street2;
+  String? city;
+  String? postcode;
+  String? state;
+  String? country;
+  String? creditShippingZone;
+  String? twitter;
+  String? facebook;
+  String? instagram;
+  String? youtube;
+  String? linkedin;
+  String? whatsapp;
+  String? viber;
+  String? tikTok;
 
   Response(
       {this.storeName,
@@ -237,6 +241,7 @@ class Response {
         this.city,
         this.postcode,
         this.state,
+        this.country,
         this.creditShippingZone,
         this.twitter,
         this.facebook,
@@ -259,6 +264,7 @@ class Response {
     city = json['city'];
     postcode = json['postcode'];
     state = json['state'];
+    country = json['country'];
     creditShippingZone = json['credit_shipping_zone'];
     twitter = json['twitter'];
     facebook = json['facebook'];
@@ -271,7 +277,7 @@ class Response {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['store_name'] = storeName;
     data['phone'] = phone;
     data['address'] = address;
@@ -283,6 +289,7 @@ class Response {
     data['city'] = city;
     data['postcode'] = postcode;
     data['state'] = state;
+    data['country'] = country;
     data['credit_shipping_zone'] = creditShippingZone;
     data['twitter'] = twitter;
     data['facebook'] = facebook;
@@ -295,4 +302,5 @@ class Response {
     return data;
   }
 }
+
 
