@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dio/dio.dart' as dio;
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
@@ -32,7 +31,8 @@ class StoreSettingsController extends GetxController {
   final TextEditingController storePhoneController = TextEditingController();
 
   final TextEditingController storeSlugController = TextEditingController();
-  final TextEditingController shopDescriptionController = TextEditingController();
+  // final TextEditingController shopDescriptionController = TextEditingController();
+  // RxString shopDescriptionController = "".obs;
   // final TextEditingController streetController = TextEditingController();
   final TextEditingController street2Controller = TextEditingController();
   final TextEditingController cityController = TextEditingController();
@@ -47,11 +47,19 @@ class StoreSettingsController extends GetxController {
   final TextEditingController whatsappController = TextEditingController();
   final TextEditingController viberController = TextEditingController();
   final TextEditingController tikTokController = TextEditingController();
-  final TextEditingController creditShippingZoneController = TextEditingController();
+  RxString creditShippingZoneController = "".obs;
 
   RxString countryCode = "".obs;
 
   final ImagePicker _picker = ImagePicker();
+
+  updateQuilValue(){
+
+    // var myJSON = jsonDecode(shopDescriptionController.value);
+    // controllerQQ = QuillController(
+    //     document: htmlparser.parse(shopDescriptionController.value),
+    //     selection: const TextSelection.collapsed(offset: 0));
+  }
 
   final storeLogoImagePath = ''.obs;
   final storeBannerImagePath = ''.obs;
@@ -123,7 +131,7 @@ class StoreSettingsController extends GetxController {
         map["logo"] = logo != null ? convert.base64Encode(logo) : null;
         map["phone"] = storePhoneController.text;
         map["store_slug"] = storeSlugController.text;
-        map["shop_description"] = shopDescriptionController.text;
+        // map["shop_description"] = shopDescriptionController.value;
         // map["street"] = streetController.text;
         map["street_2"] = street2Controller.text;
         map["city"] = cityController.text;
@@ -138,7 +146,7 @@ class StoreSettingsController extends GetxController {
         map["whatsapp"] = whatsappController.text;
         map["viber"] = viberController.text;
         map["tik_tok"] = tikTokController.text;
-        map["credit_shipping_zone"] = creditShippingZoneController.text;
+        map["credit_shipping_zone"] = creditShippingZoneController.value;
 
 
             // final _body =
@@ -197,7 +205,7 @@ class ModelStoreSettings {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     if (response != null) {
       data['response'] = response!.toJson();
@@ -277,7 +285,7 @@ class Response {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['store_name'] = storeName;
     data['phone'] = phone;
     data['address'] = address;
