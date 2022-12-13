@@ -125,7 +125,7 @@ class StoreSettingsController extends GetxController {
         final banner = await _storeBanner?.readAsBytes();
         Map<String, dynamic> map = {};
         map["cookie"] = "${AuthDb.getAuthCookie()?.cookie}";
-        map["name"] = nameController.text;
+        map["store_name"] = nameController.text;
         map["address"] = storeAddressController.text;
         map["banner"] = banner != null ? convert.base64Encode(banner) : null;
         map["logo"] = logo != null ? convert.base64Encode(logo) : null;
@@ -149,7 +149,7 @@ class StoreSettingsController extends GetxController {
         map["credit_shipping_zone"] = creditShippingZoneController.value;
 
 
-            // final _body =
+        // final _body =
         // StoreSettings(
         //   cookie: "${AuthDb.getAuthCookie()?.cookie}",
         //   name: nameController.text,

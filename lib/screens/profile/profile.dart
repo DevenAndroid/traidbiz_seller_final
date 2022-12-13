@@ -76,18 +76,18 @@ class ProfileScreen extends GetView<StoreSettingsController> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          final AuthController _controller =
+                          final AuthController controller =
                               Get.find<AuthController>();
 
-                          _controller.logout();
+                          controller.logout();
                         },
-                        child: const Text('Logout'),
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                           primary: colorSecondary,
                         ),
+                        child: const Text('Logout'),
                       ),
                     ),
                   ],

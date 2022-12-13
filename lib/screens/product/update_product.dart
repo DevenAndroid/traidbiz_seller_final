@@ -130,6 +130,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                               controller: controller.weightController,
                               decoration: inputDecorationFilled.copyWith(
                                 hintText: 'Weight(Kg)',
+                                labelText: 'Weight(Kg)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
@@ -142,7 +143,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                             TextFormField(
                               controller: controller.lengthController,
                               decoration: inputDecorationFilled.copyWith(
-                                hintText: 'Length',
+                                hintText: 'Length (cm)',
+                                labelText: 'Length (cm)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
@@ -155,7 +157,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                             TextFormField(
                               controller: controller.widthController,
                               decoration: inputDecorationFilled.copyWith(
-                                hintText: 'Width',
+                                hintText: 'Width (cm)',
+                                labelText: 'Width (cm)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
@@ -168,7 +171,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                             TextFormField(
                               controller: controller.heightController,
                               decoration: inputDecorationFilled.copyWith(
-                                hintText: 'Height',
+                                hintText: 'Height (cm)',
+                                labelText: 'Height (cm)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
