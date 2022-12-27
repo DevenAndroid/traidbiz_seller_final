@@ -339,8 +339,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    primary: colorSecondary,
+                                    ), backgroundColor: colorSecondary,
                                   ),
                                   child: const Text('Select Image'),
                                 ),
@@ -418,15 +417,15 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   }
 
   void _updateProduct() async {
-    final _response =
+    final response =
     await controller.updateProduct(context, widget.fromCreate!);
-    if (_response['status'] == 'success') {
+    if (response['status'] == 'success') {
       Get.back();
-      snack('Success', _response['message'], Icons.done);
-      final _productController = Get.find<ProductController>();
-      _productController.refreshProducts();
+      snack('Success', response['message'], Icons.done);
+      final productController = Get.find<ProductController>();
+      productController.refreshProducts();
     } else {
-      snack('Warning', _response['message'], Icons.message);
+      snack('Warning', response['message'], Icons.message);
     }
   }
 }
