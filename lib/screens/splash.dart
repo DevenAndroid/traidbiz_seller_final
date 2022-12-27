@@ -21,7 +21,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     if (SchedulerBinding.instance != null) {
-      SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         debugPrint("First Time? :${IntroDb.isFirstTimeOpen()}");
         final _screen =
             IntroDb.isFirstTimeOpen() ? const IntroScreen() : const Wrapper();
@@ -41,8 +41,10 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorPrimary,
-      body: Center(
-        child: Image.asset(splashIcon),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Image.asset(splashIcon,fit: BoxFit.cover,),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../controller/store_settings_controller.dart';
 import '../data/local/auth_db.dart';
 import '../data/models/user/user.dart';
 import '../helper/Helpers.dart';
@@ -91,6 +92,32 @@ Future<ModelGetAttributeDropDownValue> getProductAttributeTerms(
   if (response.statusCode == 200) {
     print("Get variation  response>>>>>>>>>>${jsonDecode(response.body)}");
     return ModelGetAttributeDropDownValue.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception(response.body);
+  }
+}
+
+
+
+
+Future<ModelStoreSettings> getStoreProfileInfo1() async {
+  late AuthCookie? authCookie;
+  authCookie = AuthDb.getAuthCookie();
+
+  Map map = <String, dynamic>{};
+
+  map["cookie"] = authCookie?.cookie;
+
+  http.Response response = await http.post(
+      Uri.parse(
+          "https://traidbiz.com/wp-json/wc/v3/wepos/vendor_account_settings"),
+      body: jsonEncode(map),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      });
+  if (response.statusCode == 200) {
+    print("Create attributes response>>>>>>>>>>${jsonDecode(response.body)}");
+    return ModelStoreSettings.fromJson(jsonDecode(response.body));
   } else {
     throw Exception(response.body);
   }

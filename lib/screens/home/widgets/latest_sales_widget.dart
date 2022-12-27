@@ -77,11 +77,10 @@ class LatestSales extends StatelessWidget {
             ),
             children: [
               TableRowInkWell(
-                onTap: (() => Get.to(
-                      () => OrderDetailsScreen(
-                        orderId: state?[index].id,
-                      ),
-                    )),
+                onTap: (){
+                  print(state?[index].id.toString());
+                  Get.to(() => OrderDetailsScreen(orderId: state?[index].id,),);
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Column(

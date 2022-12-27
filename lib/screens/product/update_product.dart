@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +14,7 @@ import '../../constraints/styles.dart';
 import '../../controller/category_controller.dart';
 import '../../controller/product/product_controller.dart';
 import '../../controller/product/product_detail_controller.dart';
+import '../../repository/single_product_repo.dart';
 import '../../utils/snackbar.dart';
 import 'index.dart';
 
@@ -49,7 +51,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
             ],
           ),
           body: LoadingOverlay(
-            isLoading: controller.isProductCreating,
+            isLoading: controller.isProductCreating.value,
             child: Form(
               key: controller.updateProductFormKey,
               child: SingleChildScrollView(
@@ -128,6 +130,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                               controller: controller.weightController,
                               decoration: inputDecorationFilled.copyWith(
                                 hintText: 'Weight(Kg)',
+                                labelText: 'Weight(Kg)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
@@ -140,7 +143,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                             TextFormField(
                               controller: controller.lengthController,
                               decoration: inputDecorationFilled.copyWith(
-                                hintText: 'Length',
+                                hintText: 'Length (cm)',
+                                labelText: 'Length (cm)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
@@ -153,7 +157,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                             TextFormField(
                               controller: controller.widthController,
                               decoration: inputDecorationFilled.copyWith(
-                                hintText: 'Width',
+                                hintText: 'Width (cm)',
+                                labelText: 'Width (cm)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
@@ -166,7 +171,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                             TextFormField(
                               controller: controller.heightController,
                               decoration: inputDecorationFilled.copyWith(
-                                hintText: 'Height',
+                                hintText: 'Height (cm)',
+                                labelText: 'Height (cm)',
                               ),
                               validator: (value) {
                                 if (value?.isEmpty == true) {
@@ -333,8 +339,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    primary: colorSecondary,
+                                    ), backgroundColor: colorSecondary,
                                   ),
                                   child: const Text('Select Image'),
                                 ),
@@ -344,8 +349,49 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                         ),
                       ),
                     ),
+
                     const SizedBox(height: 20),
+                    // Tax
                     const TaxAndShippingWidget(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 10,
+                      ),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if(controller.updateProductFormKey.currentState!.validate()){
+                              controller.isProductCreating.value = true;
+                              calculatePrice(
+                                productId: controller.projectId,
+                                regularPrice: controller.regularPriceController.text.trim(),
+                                width: controller.widthController.text.trim(),
+                                height: controller.heightController.text.trim(),
+                                length: controller.lengthController.text.trim(),
+                                weight: controller.weightController.text.trim()
+                              ).then((value) {
+                                controller.isProductCreating.value = false;
+                                controller.regularPriceController.text =
+                                    value.data!.priceWithShipping ?? controller.regularPriceController.text;
+                                Fluttertoast.showToast(msg: "Price Updated");
+                                setState(() {});
+                              });
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ), backgroundColor: colorSecondary,
+                          ),
+                          child: const Text('Calculate Price'),
+                        ),
+                      ),
+                    ),
+
+                    // Below Part
                     Visibility(
                       visible:
                           controller.productType?.toLowerCase() == 'variable',
@@ -371,15 +417,15 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   }
 
   void _updateProduct() async {
-    final _response =
+    final response =
     await controller.updateProduct(context, widget.fromCreate!);
-    if (_response['status'] == 'success') {
+    if (response['status'] == 'success') {
       Get.back();
-      snack('Success', _response['message'], Icons.done);
-      final _productController = Get.find<ProductController>();
-      _productController.refreshProducts();
+      snack('Success', response['message'], Icons.done);
+      final productController = Get.find<ProductController>();
+      productController.refreshProducts();
     } else {
-      snack('Warning', _response['message'], Icons.message);
+      snack('Warning', response['message'], Icons.message);
     }
   }
 }

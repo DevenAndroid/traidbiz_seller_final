@@ -27,14 +27,14 @@ class SearchProductScreen extends StatelessWidget {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
 
-          List<SearchProduct>? _products = snapshot.data;
+          List<SearchProduct>? products = snapshot.data;
 
-          return _products?.length == 0 ?
+          return products?.length == 0 ?
            const Center(child: Text("No Products Found"),) :
           ListView.builder(
-            itemCount: _products?.length,
+            itemCount: products?.length,
             itemBuilder: (context, index) => ProductItemWidget(
-              product: _products?[index],
+              product: products?[index],
             ),
           );
         },
@@ -51,9 +51,9 @@ class ProductItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        final _controller = Get.find<ProductDetailController>();
+        final controller = Get.find<ProductDetailController>();
         debugPrint(product.toString());
-        _controller.gotoUpdateProductScreen(ProductModel(
+        controller.gotoUpdateProductScreen(ProductModel(
           id: product?.id,
           title: product?.name,
           imageUrl: product?.imageUrl ?? "url",
